@@ -1,0 +1,28 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int a,d,n;
+    cin>>n;
+    int s=1;
+    while(s%4!=0)
+    {
+        s = 0;
+        a = n;
+        while(a != 0)
+        {
+            s += a%10;
+            a = a/10;
+        }
+        if(s%4 == 0)
+        {
+            cout<<n;
+            break;
+        }
+        else n++;
+
+    }
+return 0;
+}
+
+
