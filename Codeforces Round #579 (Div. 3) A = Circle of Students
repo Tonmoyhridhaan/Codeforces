@@ -1,0 +1,43 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define sf scanf
+#define pf printf
+#define pb push_back
+#define i64 long long int
+const double pi = 2*acos(0);
+
+
+int main()
+{
+    int n,q,i;
+    vector<int>v;
+    cin>>q;
+    while(q--)
+    {
+        int a;
+        cin>>n;
+
+        for(i = 0 ; i<n ; i++)
+        {
+            cin>>a;
+            v.pb(a);
+        }
+        v.pb(v[0]);
+        int sz = v.size();
+        int pos = 0;
+        bool fg = false;
+        for(i = 0 ; i<sz-1 ; i++)
+        {
+            if(abs(v[i]-v[i+1])>1) pos ++ ;
+            if(pos>1) fg = true;
+        }
+
+        if(!fg) pf("YES\n");
+        else pf("NO\n");
+        v.clear();
+    }
+
+
+return 0;
+}
+
