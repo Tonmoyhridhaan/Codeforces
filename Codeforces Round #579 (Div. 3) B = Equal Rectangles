@@ -1,0 +1,54 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define sf scanf
+#define pf printf
+#define pb push_back
+#define i64 long long int
+const double pi = 2*acos(0);
+
+int main()
+{
+    int n,i,a,x;
+    cin>>n;
+    while(n--)
+    {
+        int arr[401];
+        cin>>a;
+        a = a*4;
+        for(i = 0 ; i<a ; i++)
+        {
+            cin>>arr[i];
+        }
+
+        sort(arr,arr+a);
+        int eq = arr[0] * arr[a-1];
+        bool fg = false;
+        for(i = 1 ; i<a/2 ; i++)
+        {
+            if(i%2==1)
+            {
+                if(arr[i-1]!=arr[i])
+                {
+                    fg = true;
+                    break;
+                }
+                if(arr[(a-i)-1] != arr[a-i])
+                {
+                    fg = true;
+                    break;
+                }
+            }
+
+            if(arr[i]*arr[(a-1)-i] != eq)
+            {
+                fg = true;
+                break;
+            }
+        }
+
+        if(fg == false) pf("YES\n");
+        else pf("NO\n");
+    }
+
+return 0;
+}
