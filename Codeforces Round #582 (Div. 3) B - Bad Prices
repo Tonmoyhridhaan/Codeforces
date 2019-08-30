@@ -1,0 +1,44 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define sf scanf
+#define pf printf
+#define pb push_back
+#define i64 long long int
+const double pi = 2*acos(0) ;
+#define mx 10000001
+bool status[32000] = {0};
+ 
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int n,i,j;
+        cin>>n;
+        int arr[n];
+        for(i = 0 ; i<n ; i++)
+        {
+            cin>>arr[i];
+        }
+        int cnt = 0;
+        n--;
+        for(i = n ; i>=0 ; i--)
+        {
+            for(j = i-1 ; j>=0 ; j--)
+            {
+                if(arr[i]<arr[j]) cnt++;
+                else
+                {
+                    i = j;
+                    i++;
+                    break;
+                }
+            }
+           if(j==-1) break;
+        }
+        cout<<cnt<<endl;
+ 
+    }
+return 0;
+}
