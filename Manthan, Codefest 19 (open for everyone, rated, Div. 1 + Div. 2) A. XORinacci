@@ -1,0 +1,33 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define sf scanf
+#define pf printf
+#define pb push_back
+#define i64 long long int
+const double pi = 2*acos(0) ;
+#define mx 10000001
+bool status[32000] = {0};
+
+int main()
+{
+    int n,t,a,b;
+    cin>>t;
+    while(t--)
+    {
+        cin>>a>>b>>n;
+        if(n == 0) cout<< a <<endl;
+        else if(a == 0 && b == 0) cout<<a<<endl;
+        else if(n == 1) cout<< b <<endl;
+        else
+        {
+           if(n%3 == 0) pf("%d\n",a);
+           else if((n-1)%3 == 0) pf("%d\n",b);
+           else pf("%d\n",a^b);
+        }
+    }
+return 0;
+}
+
+
+
+
