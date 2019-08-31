@@ -1,0 +1,47 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define sf scanf
+#define pf printf
+#define pb push_back
+#define all(a) a.begin(),a.end()
+#define i64 long long int
+const double pi = 2*acos(0) ;
+const int maxn = (i64)2e5+5;
+
+int main()
+{
+    int a,n,k,j,i,mx = -1;
+    cin>>n>>k;
+    map<int ,vector<int> >mv;
+    for(j = 0 ;j<n ; j++)
+    {
+        cin>>a;
+        if(a>mx) mx = a;
+        mv[a].pb(0);
+        int cnt = 0;
+        while(a>0)
+        {
+            a = a/2;
+            cnt++;
+            mv[a].pb(cnt);
+        }
+    }
+
+    i64 mn = LLONG_MAX;
+    for(i = 0 ; i <= mx; i++)
+    {
+        if(mv[i].size()>=k)
+        {
+            sort(all(mv[i]));
+            i64 sum = 0LL;
+            for(j = 0 ; j<k ; j++)
+            {
+                sum += mv[i][j];
+            }
+           
+            if(sum<mn) mn = sum;
+        }
+    }
+    cout<<mn;
+return 0;
+}
