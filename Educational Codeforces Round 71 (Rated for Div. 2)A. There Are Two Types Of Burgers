@@ -1,0 +1,94 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define sf scanf
+#define pf printf
+#define pb push_back
+#define all(a) a.begin(),a.end()
+#define i64 long long int
+const double pi = 2*acos(0) ;
+const int maxn = (i64)2e5+5;
+
+int main()
+{
+    int q;
+    cin>>q;
+    while(q--)
+    {
+        int b,p,f,c,h,i;
+        cin>>b>>p>>f;
+        cin>>h>>c;
+        if(b<2)
+        {
+            cout<<"0"<<"\n";
+            continue;
+        }
+        int sum = 0;
+        if(c>h)
+        {
+            if(b==(f*2))
+            {
+                cout<<(c*f)<<"\n";
+                continue;
+            }
+            else if(b>(f*2))
+            {
+                sum = c*f;
+                b -= (f*2);
+                if(b >= (p*2))
+                {
+                    sum += (p*h);
+                    cout<<sum<<"\n";
+                    continue;
+                }
+                else
+                {
+                    if(b&1 == 1) b--;
+                    sum += ((b/2)*h);
+                    cout<<sum<<"\n";
+                    continue;
+                }
+            }
+            else
+            {
+                if(b&1 == 1) b--;
+                sum = ((b/2)*c);
+                cout<<sum<<"\n";
+                continue;
+            }
+        }
+        else
+        {
+            if(b==(p*2))
+            {
+                cout<<(h*p)<<"\n";
+                continue;
+            }
+            else if(b>(p*2))
+            {
+                sum = h*p;
+                b -= (p*2);
+                if(b >= (f*2))
+                {
+                    sum += (f*c);
+                    cout<<sum<<"\n";
+                    continue;
+                }
+                else
+                {
+                    if(b&1 == 1) b--;
+                    sum += ((b/2)*c);
+                    cout<<sum<<"\n";
+                    continue;
+                }
+            }
+            else
+            {
+                if(b&1 == 1) b--;
+                sum = ((b/2)*h);
+                cout<<sum<<"\n";
+                continue;
+            }
+        }
+    }
+return 0;
+}
