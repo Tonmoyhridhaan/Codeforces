@@ -1,0 +1,22 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define sf scanf
+#define pf printf
+#define pb push_back
+#define all(a) a.begin(),a.end()
+#define i64 long long int
+const double pi = 2*acos(0) ;
+const int maxn = (i64)2e5+5;
+
+int main()
+{
+   int t,i;
+   cin>>t;
+   while(t--)
+   {
+       i64 str,in,exp;
+       cin>>str>>in>>exp;
+       cout<<min(exp+1,max(0LL,(str+exp-in+1)/2))<<"\n";
+   }
+return 0;
+}
