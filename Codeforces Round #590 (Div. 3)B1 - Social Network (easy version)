@@ -1,0 +1,57 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define sf scanf
+#define pf printf
+#define fi ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
+#define pb push_back
+#define all(a) a.begin(),a.end()
+#define i64 long long int
+const double pi = 2*acos(0);
+const int maxn = (i64)2e5+5;
+int main()
+{
+    fi;
+    int n,k,i,a;
+    map<int,int>mp;
+    cin>>n>>k;
+    int arr[n+1],j=0;
+    int b[k+1];
+    for(i =0 ;i<n ; i++)
+    {
+        cin>>arr[i];
+        mp[arr[i]] = 0;
+    }
+    int l;
+    for( i = 0 ; i<n ; i++)
+    {
+        if(mp[arr[i]] == 0)
+        {
+            mp[arr[i]] = 1;
+            if(j == k)
+            {
+                mp[b[j]] = 0;
+                for(l = k ; l>=1 ; l--)
+                {
+                    b[l] = b[l-1];
+                }
+                b[1] = arr[i];
+            }
+            else
+            {
+                j++;
+                for(l = j ; l>=1 ; l--)
+                {
+                    b[l] = b[l-1];
+                }
+ 
+                b[1] = arr[i];
+            }
+        }
+    }
+ 
+    cout<<j<<"\n";
+    for(i = 1 ; i<=j ; i++) cout<<b[i]<<" ";
+ 
+ 
+return 0;
+}
