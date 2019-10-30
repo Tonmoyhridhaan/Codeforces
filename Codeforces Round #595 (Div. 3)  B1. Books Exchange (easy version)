@@ -1,0 +1,48 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define sf scanf
+#define pf printf
+#define fi ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
+#define pb push_back
+#define all(a) a.begin(),a.end()
+#define mem(x,y) memset(x,sizeof(x),y);
+#define i64 long long int
+const double pi = acos(-1.0);
+const int maxn = (i64)2e5+5;
+
+int arr[205];
+int main()
+{
+    fi;
+    int q,i;
+    cin>>q;
+    while(q--)
+    {
+        int n;
+        cin>>n;
+        for(i = 1 ; i<=n ; i++) cin>>arr[i];
+        for(i = 1 ; i<=n ; i++)
+        {
+            if(i == arr[i])
+            {
+                cout<<"1"<<" ";
+                continue;
+            }
+            int cnt = 1;
+            int j = arr[i];
+            while(arr[j] != i || arr[j] == i)
+            {
+                if(arr[j] == i)
+                {
+                    cnt++;
+                    break;
+                }
+                j = arr[j];
+                cnt++;
+            }
+            cout<<cnt<<" ";
+        }
+        cout<<"\n";
+    }
+return 0;
+}
