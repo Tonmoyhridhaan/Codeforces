@@ -1,0 +1,47 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define sf scanf
+#define pf printf
+#define pb push_back
+#define pob pop_back
+#define all(a) a.begin(),a.end()
+#define fio ios_base::sync_with_stdio(false); cin.tie(0);cout.tie(0);
+#define i64 long long int
+#define mem(x,y) memset(x,y,sizeof(x))
+#define fill(arr,b) fill(arr, arr+sizeof(arr)/sizeof(arr[0]), b)
+
+const double pi = acos(-1.0);
+const int maxn = (i64)2e5+5;
+
+bool c[105][105];
+int main()
+{
+    fio
+    int n;
+    cin>>n;
+    string s;
+    for(int i = 0 ; i<n ; i++)
+    {
+        cin>>s;
+        for(int j = 0 ; j<n ; j++)
+        {
+            c[i+1][j+1] = (s[j] == 'o');
+        }
+    }
+    for(int i = 1 ; i<=n ; i++)
+    {
+        for(int j = 1 ; j<=n ; j++)
+        {
+            int x = c[i][j-1] + c[i][j+1] + c[i-1][j] + c[i+1][j];
+            if(x&1)
+            {
+                cout<<"NO";
+                return 0;
+            }
+        }
+    }
+    cout<<"YES";
+
+return 0;
+
+}
