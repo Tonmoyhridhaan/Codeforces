@@ -1,0 +1,47 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define sf scanf
+#define pf printf
+#define pb push_back
+#define pob pop_back
+#define all(a) a.begin(),a.end()
+#define fio ios_base::sync_with_stdio(false); cin.tie(0);cout.tie(0);
+#define i64 long long int
+#define mem(x,y) memset(x,y,sizeof(x))
+#define fill(arr,b) fill(arr, arr+sizeof(arr)/sizeof(arr[0]), b)
+#define pii pair<int,int>
+
+const double pi = acos(-1.0);
+const int maxn = (i64)2e5+5;
+
+int main(){
+    fio;
+    int q;
+    cin>>q;
+    while(q--){
+        int n,i,a;
+        cin>>n;
+        vector<int>v;
+        for(i = 0 ; i<n ; i++)
+        {
+            cin>>a;
+            v.pb(a);
+        }
+        int cnt = 0;
+        vector<int> :: iterator it1,it2;
+
+        for(it1 = v.begin(); it1!=v.end();)
+        {
+            it2 = min_element(it1,v.end());
+            int x = *it2;
+            v.erase(it2);
+            v.insert(it1,x);
+            if(it1!=it2) it1 = it2;
+            else it1 = it2+1;
+        }
+        for(auto it : v) cout<<it<<" ";
+        cout<<"\n";
+    }
+return 0;
+}
+
