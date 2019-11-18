@@ -1,0 +1,19 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int n,x,a,b;
+        cin>>n>>x>>a>>b;
+        if(a>b) swap(a,b);
+        int ans = b-a;
+        int res = (a-1)+(n-b);
+        if(x>res) ans += res;
+        else ans += x;
+        cout<<ans<<"\n";
+    }
+return 0;
+}
