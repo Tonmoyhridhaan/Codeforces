@@ -1,0 +1,47 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define sf scanf
+#define pf printf
+#define pb push_back
+#define pii pair<int,int>
+#define pob pop_back
+#define all(a) a.begin(),a.end()
+#define fio ios_base::sync_with_stdio(false); cin.tie(0);cout.tie(0);
+#define i64 long long int
+#define mem(x,y) memset(x,y,sizeof(x))
+#define fill(arr,b) fill(arr, arr+sizeof(arr)/sizeof(arr[0]), b)
+ 
+const double pi = acos(-1.0);
+const int maxn = (i64)2e5+5;
+int arr[200007];
+int main(){
+    //freopen("input.txt","r",stdin);
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int n;
+        cin>>n;
+        int i,j;
+ 
+        for(i = 1 ; i<=n ; i++)
+        {
+            cin>>j;
+            arr[j] = i;
+        }
+        cout<<'1';
+        int mx = arr[1];
+        int mn = arr[1];
+        for(i = 2 ; i<n ; i++)
+        {
+ 
+            if(max(mx,arr[i])-min(mn,arr[i]) == i-1) cout<<'1';
+            else cout<<'0';
+            mx = max(mx,arr[i]);
+            mn = min(mn,arr[i]);
+        }
+        if(n>1)cout<<"1"<<endl;
+        else cout<<endl;
+    }
+return 0;
+}
