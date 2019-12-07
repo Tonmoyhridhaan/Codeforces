@@ -1,0 +1,55 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define sf scanf
+#define pf printf
+#define pb push_back
+#define pii pair<int,int>
+#define pob pop_back
+#define all(a) a.begin(),a.end()
+#define fio ios_base::sync_with_stdio(false); cin.tie(0);cout.tie(0);
+#define i64 long long int
+#define mem(x,y) memset(x,y,sizeof(x))
+#define fill(arr,b) fill(arr, arr+sizeof(arr)/sizeof(arr[0]), b)
+
+const double pi = acos(-1.0);
+const int maxn = (i64)2e5+5;
+int arr[200007];
+int pos[200007];
+int mn[200007];
+int mx[200007];
+
+int main(){
+    //freopen("input.txt","r",stdin);
+
+    int n,m,x,p1,p2,i;
+    cin>>n;
+    for(i = 1 ; i<=n ; i++)
+    {
+        arr[i] = i;
+        pos[i] = i;
+        mn[i] = i;
+        mx[i] = i;
+    }
+    cin>>m;
+    for(i = 1 ; i<=m ; i++)
+    {
+        cin>>x;
+        if(pos[x]!=1)
+        {
+            p1 = arr[pos[x]];
+            p2 = arr[pos[x]-1];
+
+            swap(arr[pos[x]],arr[pos[x]-1]);
+            swap(pos[p1],pos[p2]);
+            mn[p1] = min(pos[p1],mn[p1]);
+            mn[p2] = min(pos[p2],mn[p2]);
+            mx[p1] = max(pos[p1],mx[p1]);
+            mx[p2] = max(pos[p2],mx[p2]);
+
+        }
+    }
+    for(i = 1 ; i<=n ; i++)
+        cout<<mn[i]<<" "<<mx[i]<<endl;
+
+return 0;
+}
