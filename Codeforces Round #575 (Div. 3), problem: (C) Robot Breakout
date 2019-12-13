@@ -1,0 +1,54 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define sf scanf
+#define pf printf
+#define pb push_back
+#define pii pair<int,int>
+#define pob pop_back
+#define all(a) a.begin(),a.end()
+#define fio ios_base::sync_with_stdio(false); cin.tie(0);cout.tie(0);
+#define i64 long long int
+#define mem(x,y) memset(x,y,sizeof(x))
+#define fill(arr,b) fill(arr, arr+sizeof(arr)/sizeof(arr[0]), b)
+
+const double pi = acos(-1.0);
+const int maxn = (i64)2e5+5;
+
+int x1,x2,y1,y2;
+void init()
+{
+    x1 = -1e5;
+    x2 = 1e5;
+    y1 = 1e5;
+    y2 = -1e5;
+}
+
+int x,y,l,u,r,d;
+int main()
+{
+    //freopen("input.txt","r",stdin);
+    int t,i;
+
+    cin>>t;
+    while(t--)
+    {
+        int n;
+        init();
+        cin>>n;
+        while(n--)
+        {
+            cin>>x>>y>>l>>u>>r>>d;
+            if(l!=1) x1 = max(x,x1);
+            if(u!=1) y1 = min(y,y1);
+            if(r!=1) x2 = min(x,x2);
+            if(d!=1) y2 = max(y,y2);
+        }
+        if(x1>x2 || y2>y1) cout<<"0"<<endl;
+        else cout<<"1"<<" "<<x1<<" "<<y2<<endl;
+        init();
+
+    }
+return 0;
+}
+
+
