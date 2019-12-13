@@ -1,0 +1,55 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define sf scanf
+#define pf printf
+#define pb push_back
+#define pii pair<int,int>
+#define pob pop_back
+#define all(a) a.begin(),a.end()
+#define fio ios_base::sync_with_stdio(false); cin.tie(0);cout.tie(0);
+#define i64 long long int
+#define mem(x,y) memset(x,y,sizeof(x))
+#define fill(arr,b) fill(arr, arr+sizeof(arr)/sizeof(arr[0]), b)
+
+const double pi = acos(-1.0);
+const int maxn = (i64)2e5+5;
+
+int main()
+{
+    //freopen("input.txt","r",stdin);
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        i64 arr[4];
+        for(int i = 0 ; i<3 ; i++) cin>>arr[i];
+        if(arr[0] == arr[1] && arr[1] == arr[2])
+        {
+            cout<<"0"<<endl;
+            continue;
+        }
+        sort(arr,arr+3);
+        if(arr[0] == arr[1] && arr[1]<arr[2])
+        {
+            arr[0]++;
+            arr[1]++;
+            if(arr[1]<arr[2]) arr[2]--;
+        }
+        else if(arr[1] == arr[2] && arr[0]<arr[1])
+        {
+            arr[1]--;
+            arr[2]--;
+            if(arr[0]<arr[1]) arr[0]++;
+        }
+        else
+        {
+            arr[0]++;
+            arr[2]--;
+        }
+
+        i64 ans = abs(arr[0]-arr[1]) + abs(arr[0]-arr[2]) + abs(arr[1]-arr[2]);
+        cout<<ans<<endl;
+    }
+
+return 0;
+}
