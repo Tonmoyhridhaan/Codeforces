@@ -1,0 +1,69 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define sf scanf
+#define pf printf
+#define pb push_back
+#define pii pair<int,int>
+#define pob pop_back
+#define all(a) a.begin(),a.end()
+#define fio ios_base::sync_with_stdio(false); cin.tie(0);cout.tie(0);
+#define i64 long long int
+#define mem(x,y) memset(x,y,sizeof(x))
+#define fill(arr,b) fill(arr, arr+sizeof(arr)/sizeof(arr[0]), b)
+
+const double pi = acos(-1.0);
+const int maxn = (i64)2e5+5;
+//L  = 76 ,R  = 82 ,U  = 85 ,D  = 68
+
+int main()
+{
+    //freopen("input.txt","r",stdin);
+    int t,i;
+
+    cin>>t;
+    while(t--)
+    {
+        string s;
+        cin>>s;
+        int L=0,R=0,U=0,D=0;
+        int sz = s.size();
+        for(i = 0 ; i<sz ; i++)
+        {
+            if(s[i] == 'L') L++;
+            else if(s[i] == 'R') R++;
+            else if(s[i] == 'U') U++;
+            else if(s[i] == 'D') D++;
+        }
+        if(L > R) L = R;
+        else R = L;
+        if(U>D) U = D;
+        else D = U;
+
+        if(D == 0 && L == 0 && R == 0 && U == 0)
+        {
+            cout<<"0"<<endl;
+        }
+        else if(L == 0 && U!=0)
+        {
+            cout<<"2"<<endl<<"UD"<<endl;
+        }
+        else if(U == 0 && L!=0)
+        {
+            cout<<"2"<<endl<<"LR"<<endl;
+        }
+        else
+        {
+            cout<<L+D+U+R<<endl;
+            while(L--) cout<<"L";
+            while(U--) cout<<"U";
+            while(R--) cout<<"R";
+            while(D--) cout<<"D";
+            cout<<endl;
+        }
+        s.clear();
+    }
+
+return 0;
+}
+
+
