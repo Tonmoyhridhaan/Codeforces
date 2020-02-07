@@ -1,0 +1,53 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define sf scanf
+#define pf printf
+#define pb push_back
+#define pii pair<int,int>
+#define pob pop_back
+#define all(a) a.begin(),a.end()
+#define fio ios_base::sync_with_stdio(false); cin.tie(0);cout.tie(0);
+#define i64 long long int
+#define mem(x,y) memset(x,y,sizeof(x))
+#define fill(arr,b) fill(arr, arr+sizeof(arr)/sizeof(arr[0]), b)
+
+const double pi = acos(-1.0);
+const int maxn = (i64)2e5+5;
+
+int main()
+{
+    //freopen("input.txt","r",stdin);
+    int t;
+
+    cin>>t;
+    while(t--)
+    {
+        int n;
+        string s;
+        map<pii,int> mp;
+        pii cur = {0,0};
+        mp[{0,0}] = 0;
+        cin>>n>>s;
+        int l = -1 ,r = n;
+        for(int i = 0 ; i<n; i++)
+        {
+            if(s[i] == 'L') cur.second--;
+            if(s[i] == 'R') cur.second++;
+            if(s[i] == 'U') cur.first++;
+            if(s[i] == 'D') cur.first--;
+            if(mp.count(cur))
+            {
+                if(i-mp[cur]+1<r-l+1)
+                {
+                    r = i;
+                    l = mp[cur];
+                }
+            }
+            mp[cur] = i+1;
+        }
+        if(r==n) cout<<"-1"<<endl;
+        else cout<<l+1<<" "<<r+1<<endl;
+    }
+return 0;
+}
+
