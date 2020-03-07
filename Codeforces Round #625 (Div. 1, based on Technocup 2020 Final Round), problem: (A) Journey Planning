@@ -1,0 +1,71 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define pb push_back
+#define pii pair<int,int>
+#define pli pair<long long int,int>
+#define pob pop_back
+#define all(a) a.begin(),a.end()
+#define fio ios_base::sync_with_stdio(false); cin.tie(0);cout.tie(0);
+#define i64 long long int
+#define mem(x,y) memset(x,y,sizeof(x))
+#define fill(arr,b) fill(arr, arr+sizeof(arr)/sizeof(arr[0]), b)
+#define maxarr(n,arr,m) m =-1e9;for(int i=0;i<n;i++)if(arr[i]>m) m=arr[i];
+
+const double pi = acos(-1.0);
+const int maxn = (i64)2e5+5;
+pli minsum[400005];
+pli sum[400005];
+int main()
+{
+    int n,mx=0,x,m;
+    i64 ans=-1;
+    cin >> n;
+    int b[n+5];
+    /*pli minsum[15];
+    pli sum[15];
+    mem(minsum,0);
+    mem(sum,0);*/
+
+    for(int i = 1 ; i<=n ; i++) cin >> b[i];
+    for(int i = 1 ; i<=n ; i++)
+    {
+        int x=i-b[i];
+        if(x<0)
+        {
+            x=x*-1;
+            if(minsum[x].first>0 && minsum[x].second<b[i])
+            {
+                minsum[x].first += b[i];
+                minsum[x].second = b[i];
+            }
+            else if(minsum[x].first==0)
+            {
+                minsum[x].first = b[i];
+                minsum[x].second = b[i];
+            }
+        }
+        else
+        {
+            if(sum[x].first>0 && sum[x].second<b[i])
+            {
+                sum[x].first += b[i];
+                sum[x].second = b[i];
+            }
+            else if(sum[x].first==0)
+            {
+                sum[x].first = b[i];
+                sum[x].second = b[i];
+            }
+        }
+
+    }
+    for(int i = 0 ; i<400005 ; i++)
+    {
+        if(sum[i].first>ans) ans=sum[i].first;
+        if(minsum[i].first>ans) ans=minsum[i].first;
+    }
+    cout<<ans;
+
+return 0;
+}
+
