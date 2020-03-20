@@ -1,0 +1,51 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define pb push_back
+#define pii pair<int,int>
+#define pli pair<long long int,int>
+#define pob pop_back
+#define all(a) a.begin(),a.end()
+#define fio ios_base::sync_with_stdio(false); cin.tie(0);cout.tie(0);
+#define i64 long long int
+#define mem(x,y) memset(x,y,sizeof(x))
+#define fill(arr,b) fill(arr, arr+sizeof(arr)/sizeof(arr[0]), b)
+#define maxarr(n,arr,m) m =-1e9;for(int i=0;i<n;i++)if(arr[i]>m) m=arr[i];
+
+const double pi = acos(-1.0);
+const int maxn = (i64)2e5+5;
+
+int main()
+{
+    //freopen("input.txt","r",stdin);
+    int t;
+    cin >> t;
+    while(t--)
+    {
+        int a,b,p,i;
+        cin >> a >> b >> p;
+        string s;
+        cin >> s;
+        int sz = s.size();
+        int ans = sz-1;
+        for(int i = ans-1 ; i>=0 ; i--)
+        {
+            if(i>0 && s[i] == s[i-1]) continue;
+            else if(s[i] == 'A')
+            {
+                if(p<a) break;
+                ans = i;
+                p-=a;
+            }
+            else if(s[i] == 'B' )
+            {
+                if(p<b) break;
+                ans = i;
+                p-=b;
+            }
+            if(p<0 || (p<a && p<b)) break;
+        }
+        cout << ans+1 << endl;
+    }
+
+return 0;
+}
