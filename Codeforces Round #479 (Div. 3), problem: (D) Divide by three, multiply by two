@@ -1,0 +1,59 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define pb push_back
+#define pii pair<int,int>
+#define pli pair<long long int,int>
+#define pob pop_back
+#define all(a) a.begin(),a.end()
+#define fio ios_base::sync_with_stdio(false); cin.tie(0);cout.tie(0);
+#define i64 long long int
+#define mem(x,y) memset(x,y,sizeof(x))
+#define fill(arr,b) fill(arr, arr+sizeof(arr)/sizeof(arr[0]), b)
+#define maxarr(n,arr,m) m =-1e9;for(int i=0;i<n;i++)if(arr[i]>m) m=arr[i];
+
+const double pi = acos(-1.0);
+const int maxn = (i64)2e5+5;
+
+i64 arr[105];
+map<i64,int>mp;
+void compression(int n)
+{
+    int j=1;
+    for(int i = 0 ; i<n ; i++)
+    {
+        if(mp.find(arr[i])==mp.end())
+        {
+            mp[arr[i]] = j++;
+        }
+    }
+}
+int main()
+{
+    int n;
+    vector<i64>v;
+    cin >> n;
+    for(int i = 0 ; i<n; i++) cin >> arr[i];
+    compression(n);
+    for(int i = 0 ; i<n ; i++)
+    {
+
+        i64 a = arr[i];
+        v.pb(arr[i]);
+        bool fg = true;
+        int x = n-1;
+        while(x--)
+        {
+            if(mp[a/3] != 0 && a%3==0) a/=3;
+            else a*=2;
+            v.pb(a);
+            if(mp[a] == 0) {v.clear();fg=false;break;}
+        }
+        if(fg) break;
+
+    }
+    for(auto i:v)
+    {
+        cout << i << " ";
+    }
+return 0;
+}
