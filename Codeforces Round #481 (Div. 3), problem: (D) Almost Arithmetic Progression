@@ -1,0 +1,57 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define pb push_back
+#define pii pair<int,int>
+#define pli pair<long long int,int>
+#define pob pop_back
+#define all(a) a.begin(),a.end()
+#define fio ios_base::sync_with_stdio(false); cin.tie(0);cout.tie(0);
+#define i64 long long int
+#define mem(x,y) memset(x,y,sizeof(x))
+#define fill(arr,b) fill(arr, arr+sizeof(arr)/sizeof(arr[0]), b)
+#define maxarr(n,arr,m) m =-1e9;for(int i=0;i<n;i++)if(arr[i]>m) m=arr[i];
+
+const double pi = acos(-1.0);
+const int maxn = (i64)2e9+5;
+int b[100005],mn = maxn,n;
+int solve(int b0){
+    int dis = b[1]-b0;
+    int p = b[1]+dis;
+    int cnt = abs(b[0]-b0) + abs(b[1]-(b0+dis));
+    for(int i = 2 ; i<n;  i++){
+        if(abs(p-b[i])>1) {cnt = maxn;break;}
+        cnt += abs(p-b[i]);
+        p += dis;
+    }
+    mn = min(cnt,mn);
+    dis = b[1]-b0+1;
+    p = b[1]+dis+1;
+    cnt = abs(b[0]-b0) + abs(b[1]-(b0+dis));
+    for(int i = 2 ; i<n;  i++){
+        if(abs(p-b[i])>1) {cnt = maxn;break;}
+        cnt += abs(p-b[i]);
+        p += dis;
+    }
+    mn = min(cnt,mn);
+    dis = b[1]-b0-1;
+    p = b[1]+dis-1;
+    cnt = abs(b[0]-b0) + abs(b[1]-(b0+dis));
+    for(int i = 2 ; i<n;  i++){
+        if(abs(p-b[i])>1) {cnt = maxn;break;}
+        cnt += abs(p-b[i]);
+        p += dis;
+    }
+    mn = min(cnt,mn);
+    return mn;
+}
+int main(){
+    cin >> n;
+    for(int i = 0 ; i<n ; i++) cin >> b[i];
+    if(n<=2) {cout << "0"; return 0;}
+    solve(b[0]);
+    solve(b[0]-1);
+    solve(b[0]+1);
+    if(mn == maxn) cout << "-1";
+    else cout << mn;
+return 0;
+}
