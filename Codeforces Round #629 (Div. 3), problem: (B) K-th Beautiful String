@@ -1,0 +1,44 @@
+/*
+বন্ধু তুমি  একা  হলে  আমায় দিও  ডাক
+তোমার সাথে গল্প করবো  আমি সারারাত
+*/
+
+#include<bits/stdc++.h>
+using namespace std;
+#define pb push_back
+#define pii pair<int,int>
+#define pli pair<long long int,int>
+#define pob pop_back
+#define all(a) a.begin(),a.end()
+#define fio ios_base::sync_with_stdio(false); cin.tie(0);cout.tie(0);
+#define i64 long long int
+#define mem(x,y) memset(x,y,sizeof(x))
+#define fill(arr,b) fill(arr, arr+sizeof(arr)/sizeof(arr[0]), b)
+#define maxarr(n,arr,m) m =-1e9;for(int i=0;i<n;i++)if(arr[i]>m) m=arr[i];
+
+const double pi = acos(-1.0);
+const int maxn = (i64)2e9+5;
+
+int main()
+{
+    int t;
+    cin >> t;
+    while(t--){
+        int n,k;
+        cin >> n >> k;
+        int s = 0;
+        int i;
+        for(i = 1 ; i<n ; i++)
+        {
+            s+=i;
+            if(s>=k) break;
+        }
+        for(int j = 0 ; j<n ; j++){
+            if(j == n-(i+1) || j == n-(k-(s-i))) cout << 'b';
+            else cout << 'a';
+        }
+        cout << endl;
+
+    }
+return 0;
+}
