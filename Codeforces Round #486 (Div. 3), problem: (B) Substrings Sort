@@ -1,0 +1,97 @@
+/*
+বন্ধু তুমি  একা  হলে  আমায় দিও  ডাক
+তোমার সাথে গল্প করবো  আমি সারারাত
+*/
+
+#include<bits/stdc++.h>
+using namespace std;
+#define pb push_back
+#define pii pair<int,int>
+#define pli pair<long long int,int>
+#define pob pop_back
+#define all(a) a.begin(),a.end()
+#define fio ios_base::sync_with_stdio(false); cin.tie(0);cout.tie(0);
+#define i64 long long int
+#define mem(x,y) memset(x,y,sizeof(x))
+#define fill(arr,b) fill(arr, arr+sizeof(arr)/sizeof(arr[0]), b)
+#define maxarr(n,arr,m) m =-1e9;for(int i=0;i<n;i++)if(arr[i]>m) m=arr[i];
+
+const double pi = acos(-1.0);
+const int maxn = (i64)2e9+5;
+
+void compute(string pat,int lps[]){
+    int i = 1;
+    lps[0] = 0;
+    int len = 0;
+    while(i<pat.size()){
+        if(pat[len]==pat[i]){
+            len++;
+            lps[i] = len;
+            i++;
+        }
+        else{
+            if(len!=0){
+                len = lps[len-1];
+            }
+            else{
+                lps[i] = 0;
+                i++;
+            }
+        }
+    }
+}
+int Find(string txt, string pat, int lps[]){
+    int i=0,j=0;
+    bool fg = false;
+    while(i<txt.size()){
+        if(txt[i]==pat[j]){
+            i++;
+            j++;
+        }
+        if(j==pat.size()){
+            fg = true;
+            break;
+        }
+        else if(i < txt.size() && pat[j]!=txt[i]){
+            if(j!=0)
+            {
+                j = lps[j-1];
+            }
+            else i++;
+        }
+    }
+
+    if(fg == false) return 0;
+    else return 1;
+}
+
+int main(){
+    int n ;
+    pii arr[105];
+    cin >> n;
+    string s[n];
+    for(int i =0 ; i<n ; i++){
+        cin >> s[i] ;
+        arr[i].first = s[i].size();
+        arr[i].second = i;
+    }
+
+    sort(arr,arr+n);
+    bool fg = true;
+    for(int i = 0 ; i<n-1 ; i++){
+
+        int sz = arr[i].first;
+        int lps[sz];
+        compute(s[arr[i].second],lps);
+        if(Find(s[arr[i+1].second],s[arr[i].second],lps)!=1){
+            fg = false;
+            break;
+        }
+    }
+    if(fg){
+        cout << "YES" << endl;
+        for(int i = 0 ; i<n ; i++) cout << s[arr[i].second] << endl;
+    }
+    else cout << "NO" << endl;
+return 0;
+}
