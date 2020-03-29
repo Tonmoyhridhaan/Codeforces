@@ -1,0 +1,84 @@
+/*
+বন্ধু তুমি  একা  হলে  আমায় দিও  ডাক
+তোমার সাথে গল্প করবো  আমি সারারাত
+*/
+
+#include<bits/stdc++.h>
+using namespace std;
+#define pb push_back
+#define pii pair<int,int>
+#define pli pair<long long int,int>
+#define pbi pair<bool,int>
+#define pob pop_back
+#define all(a) a.begin(),a.end()
+#define fio ios_base::sync_with_stdio(false); cin.tie(0);cout.tie(0);
+#define i64 long long int
+#define mem(x,y) memset(x,y,sizeof(x))
+#define fill(arr,b) fill(arr, arr+sizeof(arr)/sizeof(arr[0]), b)
+#define maxarr(n,arr,m) m =-1e9;for(int i=0;i<n;i++)if(arr[i]>m) m=arr[i];
+
+const double pi = acos(-1.0);
+const int maxn = (i64)2e9+5;
+
+int a,b,c,n;
+int arr[200005];
+int istwo(int p)
+{
+    bool fg2 = false;
+    for(int i = 0 ; i<=31 ; i++)
+    {
+        int x = 1<<i;
+        if( binary_search(arr,arr+n,p+x) == 1 && binary_search(arr,arr+n,p-x) == 1 )
+        {
+            a = p+x;
+            b = p;
+            c = p-x;
+            return 3;
+        }
+        else if(binary_search(arr,arr+n,p+x) == 1)
+        {
+            a = p+x;
+            b = p;
+            fg2=true;
+        }
+        else if(binary_search(arr,arr+n,p+x) == 1)
+        {
+            a = p-x;
+            b = p;
+            fg2 = true;
+        }
+    }
+    if(fg2) return 2;
+    else return 1;
+}
+
+int main()
+{
+    cin >> n;
+    for(int i = 0 ; i<n ; i++) cin >> arr[i];
+    sort(arr,arr+n);
+    bool fg2=false,fg3=false;
+    for(int i = 0 ; i<n ; i++)
+    {
+        int x = istwo(arr[i]);
+        if(x == 3){fg3=true;break;}
+        else if(x == 2){fg2=true;}
+    }
+    if(fg3)
+    {
+        cout << "3" << endl;
+        cout << a <<" "<<b <<" "<<c;
+    }
+    else if(fg2)
+    {
+        cout << "2" <<endl;
+        cout << a << " " << b;
+    }
+    else
+    {
+        cout << "1" << endl;
+        cout << arr[0] ;
+    }
+
+return 0;
+}
