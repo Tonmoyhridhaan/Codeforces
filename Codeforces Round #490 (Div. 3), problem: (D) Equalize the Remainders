@@ -1,0 +1,62 @@
+/*
+বন্ধু তুমি  একা  হলে  আমায় দিও  ডাক
+তোমার সাথে গল্প করবো  আমি সারারাত
+*/
+
+#include<bits/stdc++.h>
+using namespace std;
+#define pb push_back
+#define pii pair<int,int>
+#define pli pair<long long int,int>
+#define pbi pair<bool,int>
+#define pob pop_back
+#define all(a) a.begin(),a.end()
+#define fio ios_base::sync_with_stdio(false); cin.tie(0);cout.tie(0);
+#define i64 long long int
+#define mem(x,y) memset(x,y,sizeof(x))
+#define fill(arr,b) fill(arr, arr+sizeof(arr)/sizeof(arr[0]), b)
+#define maxarr(n,arr,m) m =-1e9;for(int i=0;i<n;i++)if(arr[i]>m) m=arr[i];
+
+const double pi = acos(-1.0);
+const int maxn = (i64)2e9+5;
+int arr[200005];
+vector< pii > fre;
+int main()
+{
+    int n,m;
+    cin >> n >> m;
+    vector< int > v[m];
+    int x = n/m;
+    for(int i = 0 ; i<n ; i++)
+    {
+        cin >> arr[i];
+        v[arr[i]%m].pb(i);
+    }
+    i64 cnt = 0;
+    for(int j = 0 ; j<2*m ; j++)
+    {
+        int i = j%m;
+        while(v[i].size()>x)
+        {
+            int f = v[i].back();
+            v[i].pob();
+            fre.pb({f,j});
+        }
+        while(v[i].size()<x && fre.size()!=0)
+        {
+            pii k = fre.back();
+            fre.pob();
+            v[i].pb(k.first);
+            arr[k.first] += j-k.second;
+            cnt+= j-k.second;
+        }
+    }
+    cout << cnt << endl;
+    for(int i = 0 ; i<n ; i++)
+    {
+        cout << arr[i] << " ";
+    }
+
+
+return 0;
+}
