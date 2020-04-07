@@ -1,0 +1,107 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define pb push_back
+#define pii pair<int,int>
+#define pli pair<long long int,int>
+#define pbi pair<bool,int>
+#define pob pop_back
+#define all(a) a.begin(),a.end()
+#define fio ios_base::sync_with_stdio(false); cin.tie(0);cout.tie(0);
+#define i64 long long int
+#define mem(x,y) memset(x,y,sizeof(x))
+#define fill(arr,b) fill(arr, arr+sizeof(arr)/sizeof(arr[0]), b)
+#define maxarr(n,arr,m) m =-1e9;for(int i=0;i<n;i++)if(arr[i]>m) m=arr[i];
+
+const double pi = acos(-1.0);
+const int maxn = (i64)2e9+5;
+
+int arr[200005];
+bool chk[200005];
+int main()
+{
+    //freopen("input.txt","r",stdin);
+    int t;
+    cin >> t;
+    while(t--)
+    {
+        int n;
+        cin >> n;
+        int mx1=0,mx2=0;
+
+        for(int i = 0 ;i<n ; i++)
+        {
+            cin >> arr[i];
+            if(chk[arr[i]] == 0)mx1 = max(arr[i],mx1);
+            else mx2=max(arr[i],mx2);
+            chk[arr[i]]=1;
+        }
+        if(mx1==0 || mx2==0) {cout << "0" <<endl;continue;}
+        mem(chk,0);
+        bool fg1=true,fg2=true;
+        int cnt=0,i;
+        for(i = 0 ;i<mx1 ; i++)
+        {
+            if(chk[arr[i]]==1 || arr[i]>mx1){fg1=false;break;}
+            else {chk[arr[i]]=1;}
+            cnt++;
+        }
+        if(cnt==mx1 && fg1)
+        {
+            cnt=0;
+            mem(chk,0);
+            for( ; i<n ; i++)
+            {
+                if(chk[arr[i]]==1 || arr[i]>mx2){fg1=false;break;}
+                else {chk[arr[i]]=1;}
+                cnt++;
+            }
+            if(cnt!=mx2) fg1=false;
+        }
+
+        mem(chk,0);
+        cnt=0;
+        for(i = 0 ;i<mx2 ; i++)
+        {
+            if(chk[arr[i]]==1 || arr[i]>mx2){fg2=false;break;}
+            else {chk[arr[i]]=1;}
+            cnt++;
+        }
+        if(cnt==mx2 && fg2)
+        {
+            cnt=0;
+            mem(chk,0);
+            for( ; i<n ; i++)
+            {
+                if(chk[arr[i]]==1 || arr[i]>mx1){fg2=false;break;}
+                else {chk[arr[i]]=1;cnt++;}
+            }
+            if(cnt!=mx1) fg2=false;
+        }
+        mem(chk,0);
+        if(!fg1 && !fg2) {cout << "0" << endl;continue;}
+        else if(fg1 && !fg2)
+        {
+            cout << "1" << endl;
+            cout << mx1 << " " << mx2 << endl;
+        }
+        else if(!fg1 && fg2)
+        {
+            cout << "1" << endl;
+            cout << mx2 << " " << mx1 << endl;
+        }
+        else if(fg1&&fg2)
+        {
+            if(mx1==mx2)
+            {
+                cout << "1" << endl;
+                cout << mx1 << " " << mx2 << endl;
+                continue;
+            }
+            cout << "2" << endl;
+            cout << mx1 << " " << mx2 << endl;
+            cout << mx2 << " " << mx1 << endl;
+        }
+
+    }
+    return 0;
+}
