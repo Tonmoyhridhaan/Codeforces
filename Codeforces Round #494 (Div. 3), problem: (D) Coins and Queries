@@ -1,0 +1,57 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define pb push_back
+#define pii pair<int,int>
+#define pli pair<long long int,int>
+#define pbi pair<bool,int>
+#define pob pop_back
+#define all(a) a.begin(),a.end()
+#define fio ios_base::sync_with_stdio(false); cin.tie(0);cout.tie(0);
+#define i64 long long int
+#define mem(x,y) memset(x,y,sizeof(x))
+#define fill(arr,b) fill(arr, arr+sizeof(arr)/sizeof(arr[0]), b)
+#define maxarr(n,arr,m) m =-1e9;for(int i=0;i<n;i++)if(arr[i]>m) m=arr[i];
+
+const double pi = acos(-1.0);
+const int maxn = (i64)2e9+5;
+
+map <int,int> mp;
+int arr[200005];
+int main()
+{
+    //freopen("input.txt","r",stdin);
+    int n,q,b,a,k=0;
+    scanf("%d%d",&n,&q);
+    for(int i = 0 ; i<n ; i++)
+    {
+        scanf("%d",&a);
+        if(mp[a]==0) arr[k++]=a;
+        mp[a]++;
+    }
+    n=k;
+    sort(arr,arr+n,greater<int>());
+
+    while(q--)
+    {
+        scanf("%d",&b);
+        int cnt = 0;
+        for(int i = 0 ; i<n ; i++)
+        {
+            if(b<arr[i]) continue;
+            else if(b/arr[i] <= mp[arr[i]])
+            {
+                cnt += b/arr[i];
+                b = b%arr[i];
+            }
+            else
+            {
+                b -= mp[arr[i]]*arr[i];
+                cnt += mp[arr[i]];
+            }
+            if(b==0) break;
+        }
+        if(b==0) printf("%d\n",cnt);
+        else printf("-1\n");
+    }
+    return 0;
+}
