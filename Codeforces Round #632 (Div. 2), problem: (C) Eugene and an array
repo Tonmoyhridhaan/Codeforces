@@ -1,0 +1,45 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define pb push_back
+#define pii pair<int,int>
+#define pli pair<long long int,int>
+#define pbi pair<bool,int>
+#define pob pop_back
+#define all(a) a.begin(),a.end()
+#define fio ios_base::sync_with_stdio(false); cin.tie(0);cout.tie(0);
+#define i64 long long int
+#define mem(x,y) memset(x,y,sizeof(x))
+#define fill(arr,b) fill(arr, arr+sizeof(arr)/sizeof(arr[0]), b)
+#define maxarr(n,arr,m) m =-1e9;for(int i=0;i<n;i++)if(arr[i]>m) m=arr[i];
+
+const double pi = acos(-1.0);
+const int maxn = (i64)2e9+5;
+
+i64 arr[200005];
+map<i64,int>mp;
+int main()
+{
+    int n,a;
+    scanf("%d",&n);
+    for(int i = 1 ; i<=n ; i++) {scanf("%d",&a);arr[i] = arr[i-1]+a ;}
+
+    int cnt=0;
+    i64 ans=0;
+    for(int i = 1 ; i<=n ; i++)
+    {
+        cnt++;
+        if(mp[arr[i]] != 0)
+        {
+            int x = i-(mp[arr[i]]+1);
+            if(cnt>x) cnt=x;
+        }
+        else if(arr[i]==0)
+        {
+            cnt = i-1;
+        }
+        mp[arr[i]] = i;
+        ans += cnt;
+    }
+    cout << ans;
+    return 0;
+}
