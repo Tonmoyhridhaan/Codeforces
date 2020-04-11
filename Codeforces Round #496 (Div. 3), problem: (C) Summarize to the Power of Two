@@ -1,0 +1,52 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define pb push_back
+#define pii pair<int,int>
+#define pli pair<long long int,int>
+#define pbi pair<bool,int>
+#define pob pop_back
+#define all(a) a.begin(),a.end()
+#define fio ios_base::sync_with_stdio(false); cin.tie(0);cout.tie(0);
+#define i64 long long int
+#define mem(x,y) memset(x,y,sizeof(x))
+#define fill(arr,b) fill(arr, arr+sizeof(arr)/sizeof(arr[0]), b)
+#define maxarr(n,arr,m) m =-1e9;for(int i=0;i<n;i++)if(arr[i]>m) m=arr[i];
+
+const double pi = acos(-1.0);
+const int maxn = (i64)2e9+5;
+int arr[120005];
+i64 power[40];
+map<i64,int>mp;
+
+void f()
+{
+    for(int i = 0 ; i<36;  i++)
+    {
+        power[i] = pow(2,i);
+    }
+}
+int main()
+{
+    //freopen("input.txt","r",stdin);
+    f();
+    int n;
+    scanf("%d",&n);
+    for(int i = 0 ; i<n ; i++)  {scanf("%d",&arr[i]);mp[arr[i]]++;}
+    int cnt = 0;
+    for(int i = 0 ; i<n ; i++)
+    {
+        bool fg = false;
+        for(int j = 0 ; j<36 ; j++)
+        {
+            i64 x = power[j]-arr[i];
+            if(x==arr[i])
+            {
+                if(mp[x]>1) {fg=true;break;}
+            }
+            else if(mp[x]!=0) {fg=true;break;}
+        }
+        if(!fg) cnt++;
+    }
+    printf("%d",cnt);
+    return 0;
+}
