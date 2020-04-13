@@ -1,0 +1,58 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define pb push_back
+#define pii pair<int,int>
+#define pli pair<long long int,int>
+#define pbi pair<bool,int>
+#define pob pop_back
+#define all(a) a.begin(),a.end()
+#define fio ios_base::sync_with_stdio(false); cin.tie(0);cout.tie(0);
+#define i64 long long int
+#define mem(x,y) memset(x,y,sizeof(x))
+#define fill(arr,b) fill(arr, arr+sizeof(arr)/sizeof(arr[0]), b)
+#define maxarr(n,arr,m) m =-1e9;for(int i=0;i<n;i++)if(arr[i]>m) m=arr[i];
+
+const double pi = acos(-1.0);
+const int maxn = (i64)2e9+5;
+
+i64 arr[100005];
+i64 power[40];
+
+void f()
+{
+    power[1]=1;
+    for(int i = 2 ; i<37;  i++)
+    {
+        power[i] = power[i-1]<<1;
+    }
+}
+int main()
+{
+   //freopen("input.txt","r",stdin);
+   int t;
+   f();
+   scanf("%d",&t);
+   while(t--)
+   {
+       int n;
+       i64 tmp = 0;
+       scanf("%d",&n);
+       for(int i = 0 ; i<n ; i++){scanf("%lld",&arr[i]);}
+
+       int j = 0;
+       for(int i = 1 ; i<n ; i++)
+       {
+           i64 x = (arr[i-1] - arr[i]);
+           if(x<=0) continue;
+           while(x>tmp)
+           {
+               j++;
+               tmp+=power[j];
+           }
+           arr[i] = arr[i-1];
+       }
+       printf("%d\n",j);
+   }
+
+return 0;
+}
