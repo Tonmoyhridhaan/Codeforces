@@ -1,0 +1,60 @@
+#pragma GCC optimize("Ofast")
+#pragma GCC target("avx,avx2,fma")
+#pragma GCC optimization ("unroll-loops")
+
+#include<bits/stdc++.h>
+using namespace std;
+#define pb push_back
+#define pii pair<int,int>
+#define pli pair<long long int,int>
+#define pbi pair<bool,int>
+#define pob pop_back
+#define all(a) a.begin(),a.end()
+#define fio ios_base::sync_with_stdio(false); cin.tie(0);cout.tie(0);
+#define i64 long long int
+#define mem(x,y) memset(x,y,sizeof(x))
+#define fill(arr,b) fill(arr, arr+sizeof(arr)/sizeof(arr[0]), b)
+#define maxarr(n,arr,m) m =-1e9;for(int i=0;i<n;i++)if(arr[i]>m) m=arr[i];
+#define read freopen("input.txt","r",stdin);
+
+const double pi = acos(-1.0);
+const int maxn = (i64)1e9+7;
+int arr[200005];
+int peaks[200005];
+int main()
+{
+    //read;
+    int t;
+    cin >> t;
+    while(t--)
+    {
+        int n,k;
+        cin >> n >> k;
+        for(int i = 1 ; i<=n ; i++) cin >> arr[i];
+
+        for(int i = 2 ; i<=n ; i++)
+        {
+            if(arr[i]>arr[i-1] && arr[i]>arr[i+1]) peaks[i] = peaks[i-1]+1;
+            else peaks[i] = peaks[i-1];
+        }
+        int mx=0,ans=1,p=1,x;
+        for(int i = 1 ; i<=n-k+1 ; i++)
+        {
+            x = (peaks[i+k-1]-peaks[i]);
+            if(peaks[i]!=peaks[i-1]) x--;
+            if(peaks[i+k-1]!=peaks[i+k-2]) x--;
+
+            if(x>mx)
+            {
+                mx=x;
+                ans=i;
+                p=x+1;
+            }
+        }
+        cout << p << " " << ans << endl;
+        for(int i = 0 ; i<=n ; i++ )peaks[i]=0;
+
+    }
+
+    return 0;
+}
