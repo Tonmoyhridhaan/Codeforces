@@ -1,0 +1,56 @@
+#pragma GCC optimize("Ofast")
+#pragma GCC target("avx,avx2,fma")
+#pragma GCC optimization ("unroll-loops")
+
+#include<bits/stdc++.h>
+using namespace std;
+#define pb push_back
+#define pii pair<int,int>
+#define pli pair<long long int,int>
+#define pbi pair<bool,int>
+#define pob pop_back
+#define all(a) a.begin(),a.end()
+#define fio ios_base::sync_with_stdio(false); cin.tie(0);cout.tie(0);
+#define i64 long long int
+#define mem(x,y) memset(x,y,sizeof(x))
+#define fill(arr,b) fill(arr, arr+sizeof(arr)/sizeof(arr[0]), b)
+#define maxarr(n,arr,m) m =-1e9;for(int i=0;i<n;i++)if(arr[i]>m) m=arr[i];
+#define read freopen("input.txt","r",stdin);
+#define sz 200005
+const double pi = acos(-1.0);
+const int maxn = (i64)1e9+7;
+
+int depth[sz],sub[sz],diff[sz];
+vector<int> con[sz];
+
+int dfs(int u,int f)
+{
+    depth[u]=depth[f]+1;
+    sub[u]=1;
+	for(int i=0;i<con[u].size();++i)
+    {
+		if (con[u][i]==f)continue;
+		sub[u]+=dfs(con[u][i],u);
+	}
+	diff[u]=sub[u]-depth[u];
+	return sub[u];
+}
+
+int main()
+{
+    //read;
+    int n,u,v,k;
+    cin >> n >> k;
+    for(int i = 0 ; i<n-1 ; i++)
+    {
+        cin >> u >> v;
+        con[u].pb(v);
+        con[v].pb(u);
+    }
+    dfs(1,0);
+    sort(diff+1,diff+n+1,greater<int>());
+    i64 sum = 0;
+    for(int i = 1 ; i<=n-k ; i++) sum+=diff[i];
+    cout << sum;
+    return 0;
+}
