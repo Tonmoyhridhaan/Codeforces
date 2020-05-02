@@ -1,0 +1,76 @@
+#pragma GCC optimize("Ofast")
+#pragma GCC target("avx,avx2,fma")
+#pragma GCC optimization ("unroll-loops")
+
+#include<bits/stdc++.h>
+using namespace std;
+#define pb push_back
+#define pii pair<int,int>
+#define pli pair<long long int,int>
+#define pbi pair<bool,int>
+#define pob pop_back
+#define all(a) a.begin(),a.end()
+#define fio ios_base::sync_with_stdio(false); cin.tie(0);cout.tie(0);
+#define i64 long long int
+#define mem(x,y) memset(x,y,sizeof(x))
+#define fill(arr,b) fill(arr, arr+sizeof(arr)/sizeof(arr[0]), b)
+#define maxarr(n,arr,m) m =-1e9;for(int i=0;i<n;i++)if(arr[i]>m) m=arr[i];
+#define read freopen("input.txt","r",stdin);
+
+const double pi = acos(-1.0);
+const int maxn = (i64)1e9+7;
+
+int arr[105];
+bool chk[105];
+int main()
+{
+    //read;
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        mem(chk,0);
+        int n,k,dist=0;
+        vector<int>v;
+        cin>>n>>k;
+        for(int i=0;i<n;i++)
+        {
+            cin>>arr[i];
+            if(chk[arr[i]]==0)
+            {
+                dist++;
+                v.pb(arr[i]);
+            }
+            chk[arr[i]]=1;
+        }
+        if(dist>k){cout<<"-1"<<endl;continue;}
+        dist=k-dist;
+        //for(int i=0;i<k;i++)v.pb(arr[i]);
+        int i=0,j=0;
+        while(dist)
+        {
+            while(i<=n)
+            {
+                i++;
+                if(chk[i]==0)
+                {
+                    v.pb(i);
+                    break;
+                }
+            }
+            dist--;
+        }
+        //for(int i=0;i<v.size();i++) cout<<v[i]<<" ";
+        //cout<<endl;
+        for(i=0,j=0;j<n;i++)
+        {
+            if(v[i]!=arr[j])v.pb(v[i]);
+            else v.pb(arr[j++]);
+        }
+        int sz=v.size();
+        cout<<sz<<endl;
+        for(i=0;i<sz;i++) cout<<v[i]<<" ";
+        cout<<endl;
+    }
+    return 0;
+}
