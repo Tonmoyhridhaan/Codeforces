@@ -1,0 +1,48 @@
+#pragma GCC optimize("Ofast")
+#pragma GCC target("avx,avx2,fma")
+#pragma GCC optimization ("unroll-loops")
+
+#include<bits/stdc++.h>
+using namespace std;
+#define pb push_back
+#define pii pair<int,int>
+#define pli pair<long long int,int>
+#define pbi pair<bool,int>
+#define pob pop_back
+#define all(a) a.begin(),a.end()
+#define fio ios_base::sync_with_stdio(false); cin.tie(0);cout.tie(0);
+#define i64 long long int
+#define mem(x,y) memset(x,y,sizeof(x))
+#define fill(arr,b) fill(arr, arr+sizeof(arr)/sizeof(arr[0]), b)
+#define maxarr(n,arr,m) m =-1e9;for(int i=0;i<n;i++)if(arr[i]>m) m=arr[i];
+#define read freopen("input.txt","r",stdin);
+
+const double pi = acos(-1.0);
+const int maxn = (i64)1e9+7;
+i64 arr[200005];
+map<i64,bool>mp;
+int main()
+{
+    //read;
+    int n,k,a,f=0,l=0;
+    scanf("%d%d",&n,&k);
+    for(int i=0;i<n;i++)
+    {
+        scanf("%d",&a);
+        if(mp[a]==1) continue;
+        if(f-l==k)
+        {
+            mp[arr[l]]=0;
+            l++;
+            arr[f++]=a;
+            mp[a]=1;
+            continue;
+        }
+        arr[f++]=a;
+        mp[a]=1;
+    }
+    printf("%d\n",f-l);
+    for(int i=f-1;i>=l;i--) printf("%d ",arr[i]);
+
+    return 0;
+}
