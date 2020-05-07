@@ -1,0 +1,56 @@
+#pragma GCC optimize("Ofast")
+#pragma GCC target("avx,avx2,fma")
+#pragma GCC optimization ("unroll-loops")
+
+#include<bits/stdc++.h>
+using namespace std;
+#define pb push_back
+#define pii pair<int,int>
+#define pli pair<long long int,int>
+#define pbi pair<bool,int>
+#define pob pop_back
+#define all(a) a.begin(),a.end()
+#define fio ios_base::sync_with_stdio(false); cin.tie(0);cout.tie(0);
+#define i64 long long int
+#define mem(x,y) memset(x,y,sizeof(x))
+#define fill(arr,b) fill(arr, arr+sizeof(arr)/sizeof(arr[0]), b)
+#define maxarr(n,arr,m) m =-1e9;for(int i=0;i<n;i++)if(arr[i]>m) m=arr[i];
+#define read freopen("input.txt","r",stdin);
+
+const double pi = acos(-1.0);
+const int maxn = (i64)1e9+7;
+i64 arr[30000];
+void f()
+{
+    arr[0]=0;
+    arr[1]=2;
+    for(i64 i=2,j=2;j<=25820;j++)
+    {
+        i=i+(j-1)+(j*2);
+        arr[j]=i;
+        //cout<<i<<" "<<j<<endl;
+    }
+}
+
+int main()
+{
+    //read;
+    int t;
+    scanf("%d",&t);
+    f();
+    while(t--)
+    {
+        i64 n,cnt=0;
+        int x;
+        scanf("%lld",&n);
+        while(n>=2*1ll)
+        {
+            i64 *it = upper_bound(arr,arr+25820,n);
+            x = it-arr;
+            n=n-arr[x-1];
+            cnt++;
+        }
+        printf("%lld\n",cnt);
+    }
+    return 0;
+}
