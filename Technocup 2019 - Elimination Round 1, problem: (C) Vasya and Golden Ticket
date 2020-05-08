@@ -1,0 +1,57 @@
+#pragma GCC optimize("Ofast")
+#pragma GCC target("avx,avx2,fma")
+#pragma GCC optimization ("unroll-loops")
+
+#include<bits/stdc++.h>
+using namespace std;
+#define pb push_back
+#define pii pair<int,int>
+#define pli pair<long long int,int>
+#define pbi pair<bool,int>
+#define pob pop_back
+#define all(a) a.begin(),a.end()
+#define fio ios_base::sync_with_stdio(false); cin.tie(0);cout.tie(0);
+#define i64 long long int
+#define mem(x,y) memset(x,y,sizeof(x))
+#define fill(arr,b) fill(arr, arr+sizeof(arr)/sizeof(arr[0]), b)
+#define maxarr(n,arr,m) m =-1e9;for(int i=0;i<n;i++)if(arr[i]>m) m=arr[i];
+#define read freopen("input.txt","r",stdin);
+
+const double pi = acos(-1.0);
+const int maxn = (i64)1e9+7;
+vector<int> v;
+void f(int sum)
+{
+    v.pb(0);
+    for(int i=1;i<=sum/2;i++)
+    {
+        if(sum%i==0) v.pb(i);
+    }
+}
+int main()
+{
+    //read;
+    int n,sum=0;
+    cin >> n;
+    string s;
+    cin>>s;
+    for(int i=0;i<n;i++){sum+=(s[i]-48);}
+    f(sum);
+    int sz=v.size();
+    for(int i=0;i<sz;i++)
+    {
+        sum=0;
+        int x=v[i];
+        bool fg=true;
+        for(int j=0;j<n;j++)
+        {
+            sum+=s[j]-48;
+            if(sum==x){sum=0;}
+            else if(sum>x){fg=false;break;}
+        }
+        if(sum!=0){fg=false;}
+        if(fg){cout<<"YES";return 0;}
+    }
+    cout<<"NO";
+    return 0;
+}
