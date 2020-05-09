@@ -1,0 +1,74 @@
+#pragma GCC optimize("Ofast")
+#pragma GCC target("avx,avx2,fma")
+#pragma GCC optimization ("unroll-loops")
+
+#include<bits/stdc++.h>
+using namespace std;
+#define pb push_back
+#define pii pair<int,int>
+#define pli pair<long long int,int>
+#define pbi pair<bool,int>
+#define pob pop_back
+#define all(a) a.begin(),a.end()
+#define fio ios_base::sync_with_stdio(false); cin.tie(0);cout.tie(0);
+#define i64 long long int
+#define mem(x,y) memset(x,y,sizeof(x))
+#define fill(arr,b) fill(arr, arr+sizeof(arr)/sizeof(arr[0]), b)
+#define maxarr(n,arr,m) m =-1e9;for(int i=0;i<n;i++)if(arr[i]>m) m=arr[i];
+#define read freopen("input.txt","r",stdin);
+
+const double pi = acos(-1.0);
+const int maxn = (i64)1e9+7;
+
+string text,pat;
+int n,m,q,f,l;
+int arr[1005];
+bool chk[1005];
+
+vector<int> createlps()
+{
+    vector<int>lps(m);
+    int i = 0;
+    for(int j = 1 ; j<m ; )
+    {
+        if(pat[i]==pat[j]){lps[j]=i+1;i++;j++;}
+        else{if(i!=0)i=lps[i-1];else j++;}
+    }
+    return lps;
+}
+void kmp()
+{
+    vector<int>lps = createlps();
+    int i=0,j=0;
+    bool fg=false;
+    while(i<n)
+    {
+        if(text[i] == pat[j]){i++;j++;}
+        else{if(j!=0) j = lps[j-1];else i++;}
+        if(j == m)
+        {
+            chk[i-m]=1;
+            j=lps[j-1];
+        }
+    }
+}
+
+int main()
+{
+   //read;
+   cin>>n>>m>>q;
+   cin>>text>>pat;
+   kmp();
+   int i,j;
+
+   for(int i=0;i<n;i++) arr[i+1]=arr[i]+chk[i];
+   while(q--)
+   {
+       cin>>i>>j;
+       i--;j-=m-1;
+       if(j<i) cout<<"0"<<endl;
+       else cout<<arr[j]-arr[i]<<endl;
+   }
+return 0;
+}
+
