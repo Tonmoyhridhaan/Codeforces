@@ -1,0 +1,50 @@
+#pragma GCC optimize("Ofast")
+#pragma GCC target("avx,avx2,fma")
+#pragma GCC optimization ("unroll-loops")
+
+#include<bits/stdc++.h>
+using namespace std;
+#define pb push_back
+#define pii pair<int,int>
+#define pli pair<long long int,int>
+#define pbi pair<bool,int>
+#define pob pop_back
+#define all(a) a.begin(),a.end()
+#define fio ios_base::sync_with_stdio(false); cin.tie(0);cout.tie(0);
+#define i64 long long int
+#define mem(x,y) memset(x,y,sizeof(x))
+#define fill(arr,b) fill(arr, arr+sizeof(arr)/sizeof(arr[0]), b)
+#define maxarr(n,arr,m) m =-1e9;for(int i=0;i<n;i++)if(arr[i]>m) m=arr[i];
+#define read freopen("input.txt","r",stdin);
+
+const double pi = acos(-1.0);
+const int maxn = (i64)1e9+7;
+
+int mat[1005][1005];
+int col[1005], row[1005];
+
+int main()
+{
+   //read;
+   int n,m,k;
+   scanf("%d%d%d",&n,&m,&k);
+   for(int i=1;i<=n;i++) row[i]=i;
+   for(int i=1;i<=m;i++) col[i]=i;
+
+   for(int i=1;i<=n;i++)
+       for(int j=1;j<=m;j++)
+           scanf("%d",&mat[i][j]);
+
+   while(k--)
+   {
+       getchar();
+       char c;
+       int x,y;
+       scanf("%c%d%d",&c,&x,&y);
+       if(c=='c') swap(col[x],col[y]);
+       else if(c=='r') swap(row[x],row[y]);
+       else printf("%d\n",mat[row[x]][col[y]]);
+   }
+   return 0;
+}
+
