@@ -1,0 +1,49 @@
+#pragma GCC optimize("Ofast")
+#pragma GCC target("avx,avx2,fma")
+#pragma GCC optimization ("unroll-loops")
+
+#include<bits/stdc++.h>
+using namespace std;
+#define pb push_back
+#define pii pair<int,int>
+#define pli pair<long long int,int>
+#define pbi pair<bool,int>
+#define pob pop_back
+#define all(a) a.begin(),a.end()
+#define fio ios_base::sync_with_stdio(false); cin.tie(0);cout.tie(0);
+#define i64 long long int
+#define mem(x,y) memset(x,y,sizeof(x))
+#define fill(arr,b) fill(arr, arr+sizeof(arr)/sizeof(arr[0]), b)
+#define maxarr(n,arr,m) m =-1e9;for(int i=0;i<n;i++)if(arr[i]>m) m=arr[i];
+#define read freopen("input.txt","r",stdin);
+
+const double pi = acos(-1.0);
+const int maxn = (i64)1e9+7;
+
+i64 arr[200005];
+vector<i64>v;
+
+int main()
+{
+    //read;
+    int n;
+    scanf("%lld",&n);
+    for(int i=0;i<n;i++) scanf("%lld",&arr[i]);
+
+    i64 x = __gcd(arr[n-1],arr[n-2]);
+    v.pb((arr[n-1]*arr[n-2])/x);
+    for(int i=n-3;i>=0;i--)
+    {
+        v.pb(arr[i]*x/__gcd(arr[i],x));
+        x=__gcd(arr[i],x);
+    }
+    x=v[v.size()-1];
+    //for(auto i:v) cout<<i<<" "; cout<<endl;
+    for(int i=v.size()-2;i>=0;i--)
+    {
+        x=__gcd(x,v[i]);
+    }
+    printf("%lld",x);
+
+    return 0;
+}
