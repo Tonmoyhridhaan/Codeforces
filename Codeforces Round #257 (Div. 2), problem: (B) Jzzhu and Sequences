@@ -1,0 +1,48 @@
+#pragma GCC optimize("Ofast")
+#pragma GCC target("avx,avx2,fma")
+#pragma GCC optimization ("unroll-loops")
+
+#include<bits/stdc++.h>
+
+using namespace std;
+#define pb push_back
+#define pii pair<int,int>
+#define pli pair<long long int,int>
+#define pbi pair<bool,int>
+#define pob pop_back
+#define all(a) a.begin(),a.end()
+#define fio ios_base::sync_with_stdio(false); cin.tie(0);cout.tie(0);
+#define i64 long long int
+#define mem(x,y) memset(x,y,sizeof(x))
+#define fill(arr,b) fill(arr, arr+sizeof(arr)/sizeof(arr[0]), b)
+#define maxarr(n,arr,m) m =-1e9;for(int i=0;i<n;i++)if(arr[i]>m) m=arr[i];
+#define read freopen("input.txt","r",stdin);
+
+const double pi = acos(-1.0);
+const int maxn = (i64)1e9+7;
+i64 m=1000000007;
+
+i64 neg(i64 n)
+{
+    i64 t = (abs(n)/m)+1*1LL;
+    return (m*t + n)%m;
+}
+int main()
+{
+    i64 f1,f2,n,fi;
+    scanf("%lld%lld%lld",&f1,&f2,&n);
+    n%=6;
+    if(n==0) n=6;
+    if(n==1) {if(f1<0)f1=neg(f1);printf("%lld",f1);return 0;}
+    else if(n==2) {if(f2<0)f2=neg(f2);printf("%lld",f2);return 0;}
+    for(i64 i=3;i<=n;i++)
+    {
+        fi=f2-f1;
+        if(i==n)break;
+        f1=f2;
+        f2=fi;
+    }
+
+    printf("%lld",neg(fi));
+    return 0;
+}
