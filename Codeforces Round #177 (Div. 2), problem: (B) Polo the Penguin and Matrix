@@ -1,0 +1,49 @@
+#pragma GCC optimize("Ofast")
+#pragma GCC target("avx,avx2,fma")
+#pragma GCC optimization ("unroll-loops")
+
+#include<bits/stdc++.h>
+
+using namespace std;
+#define pb push_back
+#define pii pair<int,int>
+#define pli pair<long long int,int>
+#define pbi pair<bool,int>
+#define pob pop_back
+#define all(a) a.begin(),a.end()
+#define fio ios_base::sync_with_stdio(false); cin.tie(0);cout.tie(0);
+#define i64 long long int
+#define mem(x,y) memset(x,y,sizeof(x))
+#define fill(arr,b) fill(arr, arr+sizeof(arr)/sizeof(arr[0]), b)
+#define maxarr(n,arr,m) m =-1e9;for(int i=0;i<n;i++)if(arr[i]>m) m=arr[i];
+#define read freopen("input.txt","r",stdin);
+
+const double pi = acos(-1.0);
+const int maxn = (i64)1e9+7;
+
+int arr[10005];
+int main()
+{
+    int n,m,d;
+    scanf("%d%d%d",&n,&m,&d);
+    int x=n*m;
+    for(int i=0;i<x;i++) scanf("%d",&arr[i]);
+    int k=arr[0]%d;
+    arr[0]=arr[0]/d;
+    bool fg=true;
+    for(int i=1;i<x;i++)
+    {
+        if(arr[i]%d!=k) {fg=false;break;}
+        else arr[i] /= d;
+    }
+    if(!fg){printf("-1");return 0;}
+    sort(arr,arr+x);
+    k=x/2;
+    n=0;
+    for(int i=0;i<x;i++)
+    {
+        n+=(abs(arr[i]-arr[k]));
+    }
+    printf("%d",n);
+    return 0;
+}
