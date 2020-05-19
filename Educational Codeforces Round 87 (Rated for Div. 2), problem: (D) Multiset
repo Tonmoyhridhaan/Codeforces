@@ -1,0 +1,98 @@
+#pragma GCC optimize("Ofast")
+#pragma GCC target("avx,avx2,fma")
+#pragma GCC optimization ("unroll-loops")
+
+#include<bits/stdc++.h>
+
+using namespace std;
+#define pb push_back
+#define pii pair<int,int>
+#define pli pair<long long int,int>
+#define pbi pair<bool,int>
+#define pob pop_back
+#define all(a) a.begin(),a.end()
+#define fio ios_base::sync_with_stdio(false); cin.tie(0);cout.tie(0);
+#define i64 long long int
+#define mem(x,y) memset(x,y,sizeof(x))
+#define fill(arr,b) fill(arr, arr+sizeof(arr)/sizeof(arr[0]), b)
+#define maxarr(n,arr,m) m =-1e9;for(int i=0;i<n;i++)if(arr[i]>m) m=arr[i];
+#define read freopen("input.txt","r",stdin);
+
+const int maxn = (i64)1e9+7;
+const double pi = acos(-1.0);
+
+int arr[1000005];
+int tree[4000005];
+int ans,n;
+void init(int node, int b, int e){
+    if(b == e){
+         tree[node] = arr[b];
+         return;
+    }
+    int left = node<<1;
+    int right = (node<<1) + 1;
+    int m = (b+e)/2;
+    init(left,b,m);
+    init(right,m+1,e);
+    tree[node] = tree[left]+tree[right];
+}
+
+void update(int node, int b, int e, int i, int value){
+    if(i<b || i>e) return;
+    else if(b>=i && e<=i){
+        tree[node] += value;
+        return;
+    }
+    int left = node<<1;
+    int right = (node<<1) + 1;
+    int m = (b+e)/2;
+    update(left,b,m,i,value);
+    update(right,m+1,e,i,value);
+    tree[node] = tree[left]+tree[right];
+}
+
+void query(int node, int b, int e,int x){
+    if(b==e) {
+            update(1,1,n,b,-1);
+            return;
+    }
+    int left = node<<1;
+    int right = (node<<1) + 1;
+    int m = (b+e)/2;
+    if(tree[left]>=x) query(left,b,m,x);
+    else query(right,m+1,e,x-tree[left]);
+}
+
+void print(int node, int b,int e)
+{
+    if(b==e)
+    {
+        if(tree[node]>0) ans=b;
+        return;
+    }
+    int left = node<<1;
+    int right = (node<<1) + 1;
+    int m = (b+e)/2;
+    print(left,b,m);
+    print(right,m+1,e);
+}
+int main()
+{
+    //read;
+    int q,a;
+    scanf("%d%d",&n,&q);
+    for(int i=1;i<=n;i++){scanf("%d",&a);arr[a]++;}
+    init(1,1,n);
+
+    while(q--)
+    {
+        int k;
+        scanf("%d",&k);
+        if(k>0) update(1,1,n,k,1);
+        else query(1,1,n,-k);
+    }
+    print(1,1,n);
+    printf("%d",ans);
+
+    return 0;
+}
