@@ -1,0 +1,82 @@
+#pragma GCC optimize("Ofast")
+#pragma GCC target("avx,avx2,fma")
+#pragma GCC optimization ("unroll-loops")
+
+#include<bits/stdc++.h>
+
+using namespace std;
+#define pb push_back
+#define pii pair<int,int>
+#define pli pair<long long int,int>
+#define pbi pair<bool,int>
+#define pob pop_back
+#define all(a) a.begin(),a.end()
+#define fio ios_base::sync_with_stdio(false); cin.tie(0);cout.tie(0);
+#define i64 long long int
+#define mem(x,y) memset(x,y,sizeof(x))
+#define fill(arr,b) fill(arr, arr+sizeof(arr)/sizeof(arr[0]), b)
+#define maxarr(n,arr,m) m =-1e9;for(int i=0;i<n;i++)if(arr[i]>m) m=arr[i];
+#define read freopen("input.txt","r",stdin);
+#define F first
+#define S second
+
+const int maxn = (i64)1e9+7;
+const double pi = acos(-1.0);
+
+pair<i64,i64> arr[200005];
+
+bool fne(const pair<i64,i64> &a, const pair<i64,i64> &b){return (a.F < b.F)||(a.F==b.F&&a.S<b.S);}
+bool sne(const pair<i64,i64> &a, const pair<i64,i64> &b){return (a.S < b.S)||(a.S==b.S&&a.F<b.F);}
+bool s[2][200005];
+int main()
+{
+    //read;
+    int n,q,blocks=0;
+    scanf("%d%d",&n,&q);
+    while(q--)
+    {
+        int i,j;
+        scanf("%d%d",&i,&j);
+
+        if(s[i][j]==0)
+        {
+            s[i][j]=1;
+            if(i==2)
+            {
+                if(j-1>=1&&s[i-1][j-1]==1) blocks++;
+                if(s[i-1][j]==1) blocks++;
+                if(i+1<=n&&s[i-1][j+1]==1) blocks++;
+            }
+            else
+            {
+                if(j-1>=1&&s[i+1][j-1]==1) blocks++;
+                if(s[i+1][j]==1) blocks++;
+                if(j+1<=n&&s[i+1][j+1]==1) blocks++;
+            }
+        }
+        else
+        {
+            s[i][j]=0;
+            if(i==2)
+            {
+                if(j-1>=1&&s[i-1][j-1]==1) blocks--;
+                if(s[i-1][j]==1) blocks--;
+                if(j+1<=n&&s[i-1][j+1]==1) blocks--;
+            }
+            else
+            {
+                if(j-1>=1&&s[i+1][j-1]==1) blocks--;
+                if(s[i+1][j]==1) blocks--;
+                if(j+1<=n&&s[i+1][j+1]==1) blocks--;
+            }
+        }
+        if(blocks>0) printf("No\n");
+        else printf("Yes\n");
+        /*cout<<blocks<<endl;
+        for(int i=1;i<=n;i++) cout<<s[1][i]<<" "; cout<<endl;
+        for(int i=1;i<=n;i++) cout<<s[2][i]<<" "; cout<<endl;*/
+
+    }
+
+    return 0;
+}
