@@ -1,0 +1,80 @@
+#pragma GCC optimize("Ofast")
+#pragma GCC target("avx,avx2,fma")
+#pragma GCC optimization ("unroll-loops")
+
+#include<bits/stdc++.h>
+
+using namespace std;
+#define pb push_back
+#define pii pair<int,int>
+#define pli pair<long long int,int>
+#define pbi pair<bool,int>
+#define pob pop_back
+#define all(a) a.begin(),a.end()
+#define fio ios_base::sync_with_stdio(false); cin.tie(0);cout.tie(0);
+#define i64 long long int
+#define mem(x,y) memset(x,y,sizeof(x))
+#define fill(arr,b) fill(arr, arr+sizeof(arr)/sizeof(arr[0]), b)
+#define maxarr(n,arr,m) m =-1e9;for(int i=0;i<n;i++)if(arr[i]>m) m=arr[i];
+#define read freopen("input.txt","r",stdin);
+#define F first
+#define S second
+
+const int maxn = (i64)1e9+7;
+const double pi = acos(-1.0);
+
+//bool fne(const pii &a, const pii &b){return (a.F < b.F)||(a.F==b.F&&a.S<b.S);}
+//bool sne(const pii &a, const pii &b){return (a.S < b.S)||(a.S==b.S&&a.F<b.F);}
+
+int arr[140005];
+int tree[560005];
+
+void init(int node, int b, int e,bool fg){
+    if(b == e){
+         tree[node] = arr[b];
+         return;
+    }
+    int left = node<<1;
+    int right = (node<<1) + 1;
+    int m = (b+e)>>1;
+    init(left,b,m,!fg);
+    init(right,m+1,e,!fg);
+    if(fg) tree[node] = tree[left]|tree[right];
+    else   tree[node] = tree[left]^tree[right];
+}
+void update(int node, int b, int e, int i, int value,bool fg){
+    if(i<b || i>e) return;
+    else if(b>=i && e<=i){
+        tree[node] = value;
+        return;
+    }
+    int left = node<<1;
+    int right = (node<<1) + 1;
+    int m = (b+e)/2;
+    update(left,b,m,i,value,!fg);
+    update(right,m+1,e,i,value,!fg);
+    if(fg) tree[node] = tree[left]|tree[right];
+    else   tree[node] = tree[left]^tree[right];
+}
+int main()
+{
+    //read;
+    int n,m;
+    scanf("%d%d",&n,&m);
+    bool fg=n%2;
+    n=1<<n;
+    for(int i=1;i<=n;i++) scanf("%d",&arr[i]);
+    if(!fg) init(1,1,n,0);
+    else init(1,1,n,1);
+    //printf("%d\n",tree[1]);
+    while(m--)
+    {
+        int p,q;
+        scanf("%d%d",&p,&q);
+        if(!fg) update(1,1,n,p,q,0);
+        else update(1,1,n,p,q,1);
+        printf("%d\n",tree[1]);
+    }
+
+    return 0;
+}
