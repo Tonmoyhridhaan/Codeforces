@@ -1,0 +1,58 @@
+#pragma GCC optimize("Ofast")
+#pragma GCC target("avx,avx2,fma")
+#pragma GCC optimization ("unroll-loops")
+
+#include<bits/stdc++.h>
+using namespace std;
+#define pb push_back
+#define pii pair<int,int>
+#define pli pair<long long int,int>
+#define pbi pair<bool,int>
+#define pob pop_back
+#define all(a) a.begin(),a.end()
+#define fio ios_base::sync_with_stdio(false); cin.tie(NULL);cout.tie(NULL);
+#define i64 long long int
+#define mem(x,y) memset(x,y,sizeof(x))
+#define fill(arr,b) fill(arr, arr+sizeof(arr)/sizeof(arr[0]), b)
+#define maxarr(n,arr,m) m=-1e9;for(int i=0;i<n;i++)if(arr[i]>m) m=arr[i];
+#define read freopen("input.txt","r",stdin);
+#define F first
+#define S second
+
+const int maxn = (i64)1e9+7;
+const double pi = acos(-1.0);
+
+//bool fne(const pii &a, const pii &b){return (a.F < b.F)||(a.F==b.F&&a.S<b.S);}
+//bool sne(const pii &a, const pii &b){return (a.S < b.S)||(a.S==b.S&&a.F<b.F);}
+
+int main()
+{
+    read;
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        string s;
+        cin>>s;
+        s=" "+s;
+        int n=s.size(),ans=10005,i;
+        int z1[n+3],z2[n+3],o1[n+3],o2[n+3];
+        z1[0]=0,o1[0]=0,z2[n]=0,o2[n]=0;
+        for(int i=1;i<n;i++)
+        {
+            z1[i]=z1[i-1],o1[i]=o1[i-1];
+            s[i]=='0'?z1[i]++:o1[i]++;
+        }
+        for(int i=n-1;i>0;i--)
+        {
+            z2[i]=z2[i+1],o2[i]=o2[i+1];
+            s[i]=='0'?z2[i]++:o2[i]++;
+        }
+        for(int i=0;i<n;i++)
+        {
+            ans=min(ans,min(z1[i]+o2[i+1],o1[i]+z2[i+1]));
+        }
+        cout<<ans<<endl;
+    }
+    return 0;
+}
