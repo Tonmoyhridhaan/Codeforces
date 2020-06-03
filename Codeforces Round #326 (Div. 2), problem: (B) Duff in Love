@@ -1,0 +1,63 @@
+#pragma GCC optimize("Ofast")
+#pragma GCC target("avx,avx2,fma")
+#pragma GCC optimization ("unroll-loops")
+
+#include<bits/stdc++.h>
+using namespace std;
+#define pb push_back
+#define pii pair<int,int>
+#define pli pair<long long int,int>
+#define pbi pair<bool,int>
+#define pob pop_back
+#define all(a) a.begin(),a.end()
+#define fio ios_base::sync_with_stdio(false); cin.tie(NULL);cout.tie(NULL);
+#define i64 long long int
+#define mem(x,y) memset(x,y,sizeof(x))
+#define fill(arr,b) fill(arr, arr+sizeof(arr)/sizeof(arr[0]), b)
+#define maxarr(n,arr,m) m=-1e9;for(int i=0;i<n;i++)if(arr[i]>m) m=arr[i];
+#define read freopen("input.txt","r",stdin);
+#define F first
+#define S second
+
+const int maxn = (i64)1e9+7;
+const double pi = acos(-1.0);
+
+//bool fne(const pii &a, const pii &b){return (a.F < b.F)||(a.F==b.F&&a.S<b.S);}
+//bool sne(const pii &a, const pii &b){return (a.S < b.S)||(a.S==b.S&&a.F<b.F);}
+vector<int>v;
+const int N=1000005;
+int pr[N+1],k=1;
+int lp[N+1];
+int f(i64 n)
+{
+    for (int i=2; i<=n+5; ++i)
+    {
+        if (lp[i] == 0){lp[i] = i;pr[k++] = i;}
+        for (int j=1; j<k && pr[j]<=lp[i] && i*pr[j]<=n; ++j)
+            lp[i * pr[j]] = pr[j];
+    }
+return 0;
+}
+
+int main()
+{
+    //read;
+    fio;
+    i64 n;
+    cin>>n;
+    i64 x=n;
+    f(sqrt(n));
+    i64 ans=1;
+    //cout<<k;
+    for(int i=1;1LL*pr[i]*pr[i]<=x;i++)
+    {
+        if(n%pr[i]==0)
+        {
+            ans*=pr[i]*1LL;
+            while(n%pr[i]==0) n/=pr[i];
+        }
+    }
+    if(n>1) ans*=n;
+    cout<<ans;
+    return 0;
+}
