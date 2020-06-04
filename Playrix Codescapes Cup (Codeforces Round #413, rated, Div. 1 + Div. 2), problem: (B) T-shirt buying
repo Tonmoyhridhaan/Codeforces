@@ -1,0 +1,112 @@
+#pragma GCC optimize("Ofast")
+#pragma GCC target("avx,avx2,fma")
+#pragma GCC optimization ("unroll-loops")
+
+#include<bits/stdc++.h>
+using namespace std;
+#define pb push_back
+#define pii pair<int,int>
+#define pli pair<long long int,int>
+#define pbi pair<bool,int>
+#define pob pop_back
+#define all(a) a.begin(),a.end()
+#define fio ios_base::sync_with_stdio(false); cin.tie(NULL);cout.tie(NULL);
+#define i64 long long int
+#define mem(x,y) memset(x,y,sizeof(x))
+#define fill(arr,b) fill(arr, arr+sizeof(arr)/sizeof(arr[0]), b)
+#define maxarr(n,arr,m) m=-1e9;for(int i=0;i<n;i++)if(arr[i]>m) m=arr[i];
+#define read freopen("input.txt","r",stdin);
+#define F first
+#define S second
+
+const int maxn = (i64)1e9+7;
+const double pi = acos(-1.0);
+
+//bool fne(const pii &a, const pii &b){return (a.F < b.F)||(a.F==b.F&&a.S<b.S);}
+//bool sne(const pii &a, const pii &b){return (a.S < b.S)||(a.S==b.S&&a.F<b.F);}
+
+vector<int> v[34];
+
+int main()
+{
+    //read;
+    fio;
+    int n;
+    cin>>n;
+    int a[n+3],b[n+3],p[n+3];
+    for(int i=0;i<n;i++) cin>>p[i];
+    for(int i=0;i<n;i++) cin>>a[i];
+    for(int i=0;i<n;i++) cin>>b[i];
+
+    for(int i=0;i<n;i++)
+    {
+        int x=min(a[i],b[i])*10+max(a[i],b[i]);
+        v[x].pb(p[i]);
+    }
+    for(int i=10;i<34;i++) sort(v[i].begin(),v[i].end(),greater<int>());
+    int m,c;
+    cin>>m;
+    for(int i=0;i<m;i++)
+    {
+        cin>>c;
+        if(c==1)
+        {
+            int x,y,z;
+            if(v[11].size()!=0) x=v[11][v[11].size()-1];
+            else x=1000000009;
+            if(v[12].size()!=0) y=v[12][v[12].size()-1];
+            else  y=1000000009;
+            if(v[13].size()!=0) z=v[13][v[13].size()-1];
+            else z=1000000009;
+            int ans= min(x,min(y,z));
+            if(ans==1000000009) cout<<"-1 ";
+            else
+            {
+                cout<<ans<<" ";
+                if(v[11].size()!=0&&v[11][v[11].size()-1]==ans) v[11].pob();
+                else if(v[12].size()!=0&&v[12][v[12].size()-1]==ans) v[12].pob();
+                else if(v[13].size()!=0&&v[13][v[13].size()-1]==ans) v[13].pob();
+            }
+        }
+        else if(c==2)
+        {
+            int x,y,z;
+            if(v[12].size()!=0) x=v[12][v[12].size()-1];
+            else x=1000000009;
+            if(v[22].size()!=0) y=v[22][v[22].size()-1];
+            else y=1000000009;
+            if(v[23].size()!=0) z=v[23][v[23].size()-1];
+            else z=1000000009;
+            int ans= min(x,min(y,z));
+            if(ans==1000000009) cout<<"-1 ";
+            else
+            {
+                cout<<ans<<" ";
+                if(v[12].size()!=0&&v[12][v[12].size()-1]==ans) v[12].pob();
+                else if(v[22].size()!=0&&v[22][v[22].size()-1]==ans) v[22].pob();
+                else if(v[23].size()!=0&&v[23][v[23].size()-1]==ans) v[23].pob();
+            }
+        }
+        else if(c==3)
+        {
+            int x,y,z;
+            if(v[13].size()!=0) x=v[13][v[13].size()-1];
+            else x=1000000009;
+            if(v[23].size()!=0) y=v[23][v[23].size()-1];
+            else y=1000000009;
+            if(v[33].size()!=0) z=v[33][v[33].size()-1];
+            else z=1000000009;
+            int ans= min(x,min(y,z));
+            if(ans==1000000009) cout<<"-1 ";
+            else
+            {
+                cout<<ans<<" ";
+                if(v[13].size()!=0&&v[13][v[13].size()-1]==ans) v[13].pob();
+                else if(v[23].size()!=0&&v[23][v[23].size()-1]==ans) v[23].pob();
+                else if(v[33].size()!=0&&v[33][v[33].size()-1]==ans) v[33].pob();
+            }
+        }
+    }
+
+    return 0;
+}
