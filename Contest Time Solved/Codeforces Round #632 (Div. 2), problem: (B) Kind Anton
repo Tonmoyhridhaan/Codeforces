@@ -1,0 +1,45 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define pb push_back
+#define pii pair<int,int>
+#define pli pair<long long int,int>
+#define pbi pair<bool,int>
+#define pob pop_back
+#define all(a) a.begin(),a.end()
+#define fio ios_base::sync_with_stdio(false); cin.tie(0);cout.tie(0);
+#define i64 long long int
+#define mem(x,y) memset(x,y,sizeof(x))
+#define fill(arr,b) fill(arr, arr+sizeof(arr)/sizeof(arr[0]), b)
+#define maxarr(n,arr,m) m =-1e9;for(int i=0;i<n;i++)if(arr[i]>m) m=arr[i];
+
+const double pi = acos(-1.0);
+const int maxn = (i64)2e9+5;
+
+int main()
+{
+    int t;
+    cin >> t;
+    while(t--)
+    {
+        int n;
+        cin >> n;
+        int a[n+5],b[n+5];
+        for(int i = 0 ; i<n ; i++) cin >> a[i];
+        for(int i = 0 ; i<n ; i++) cin >> b[i];
+        bool neg=false,zero=false,pos=false,fg=true;
+        for(int i = 0 ; i<n ; i++)
+        {
+
+            if(a[i]>b[i] && !neg){fg=false;break;}
+            else if(a[i]<b[i] && !pos){fg=false;break;}
+
+            if(a[i]==-1) neg=1;
+            else if(a[i]==0) zero=1;
+            else if(a[i]==1) pos = 1;
+        }
+        if(fg) cout << "YES" << endl;
+        else cout << "NO" << endl;
+    }
+
+    return 0;
+}
