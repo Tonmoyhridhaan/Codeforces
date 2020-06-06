@@ -1,0 +1,26 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int n,m,k;
+        cin>>n>>m>>k;
+        int x=n/k;
+        if(x>=m) cout<<m<<endl;
+        else
+        {
+            int y=(k-1);
+            int z=(m-x)/y;
+            if(((m-x)%y!=0))z++;
+            cout<<(x-z)<<endl;
+        }
+    }
+
+    return 0;
+}
+
+
