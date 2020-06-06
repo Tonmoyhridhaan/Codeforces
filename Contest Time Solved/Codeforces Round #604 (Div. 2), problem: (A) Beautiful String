@@ -1,0 +1,76 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define sf scanf
+#define pf printf
+#define pb push_back
+#define pob pop_back
+#define all(a) a.begin(),a.end()
+#define fio ios_base::sync_with_stdio(false); cin.tie(0);cout.tie(0);
+#define i64 long long int
+#define mem(x,y) memset(x,y,sizeof(x))
+#define fill(arr,b) fill(arr, arr+sizeof(arr)/sizeof(arr[0]), b)
+
+const double pi = acos(-1.0);
+const int maxn = (i64)2e5+5;
+
+int main(){
+    //freopen("r","input.txt",stdin);
+    int t;
+    cin>>t;
+    while(t--)
+    {
+
+        string s;
+        int i;
+        cin>>s;
+        int sz = s.size();
+        bool fg = true;
+        if(sz == 1 && s[0] == '?')
+        {
+            cout<<"a"<<endl;
+            continue;
+
+        }
+        for( i = 0 ; i<sz-1 ; i++)
+        {
+            if(s[i] == s[i+1] && s[i]!='?')
+            {
+                fg = false;
+                break;
+            }
+            else if(s[i] == '?' && i == 0)
+            {
+                if(s[i+1] == 'a' || s[i+1] == '?') s[i] = 'b';
+                else if(s[i+1] == 'b') s[i] = 'a';
+                else if(s[i+1] == 'c') s[i] = 'b';
+            }
+            else if(s[i] == '?' && i != 0)
+            {
+                if((s[i-1] == 'a' && s[i+1] == 'b') || (s[i-1] == 'b' && s[i+1] == 'a')) s[i] = 'c';
+                else if((s[i-1] == 'b' && s[i+1] == 'c') || (s[i-1] == 'c' && s[i+1] == 'b')) s[i] = 'a';
+                else if((s[i-1] == 'a' && s[i+1] == 'c') || (s[i-1] == 'c' && s[i+1] == 'a')) s[i] = 'b';
+                else if(s[i-1] == 'a' && s[i+1] == 'a') s[i] = 'b';
+                else if(s[i-1] == 'b' && s[i+1] == 'b') s[i] = 'a';
+                else if(s[i-1] == 'c' && s[i+1] == 'c') s[i] = 'a';
+                else if(s[i-1] == 'a' && s[i+1] == '?') s[i] = 'b';
+                else if(s[i-1] == 'b' && s[i+1] == '?') s[i] = 'c';
+                else if (s[i-1] == 'c' && s[i+1] == '?') s[i] = 'a';
+                else if(s[i-1] == 'a' && i == sz-1) s[i] = 'b';
+                else if(s[i-1] == 'b' && i == sz-1) s[i] = 'c';
+                else if (s[i-1] == 'c' && i==sz-1) s[i] = 'a';
+            }
+
+        }
+        if(s[i-1] == 'a' && s[i] == '?') s[i] = 'b';
+        else if(s[i-1] == 'b' && s[i] == '?') s[i] = 'c';
+        else if (s[i-1] == 'c' && s[i] == '?') s[i] = 'a';
+
+        if(fg)
+        {
+            for(i = 0 ; i<sz ; i++) cout<<s[i];
+            cout<<endl;
+        }
+        else if(!fg) cout<<"-1"<<endl;
+    }
+return 0;
+}
