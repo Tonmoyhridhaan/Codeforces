@@ -1,0 +1,89 @@
+#pragma GCC optimize("Ofast")
+#pragma GCC target("avx,avx2,fma")
+#pragma GCC optimization ("unroll-loops")
+
+#include<bits/stdc++.h>
+using namespace std;
+#define pb push_back
+#define pii pair<int,int>
+#define pli pair<long long int,int>
+#define pbi pair<bool,int>
+#define pob pop_back
+#define all(a) a.begin(),a.end()
+#define fio ios_base::sync_with_stdio(false); cin.tie(0);cout.tie(0);
+#define i64 long long int
+#define mem(x,y) memset(x,y,sizeof(x))
+#define fill(arr,b) fill(arr, arr+sizeof(arr)/sizeof(arr[0]), b)
+#define maxarr(n,arr,m) m =-1e9;for(int i=0;i<n;i++)if(arr[i]>m) m=arr[i];
+#define read freopen("input.txt","r",stdin);
+
+const double pi = acos(-1.0);
+const int maxn = (i64)1e9+7;
+int arr[200005];
+int tree[200005];
+bool peaks[200005];
+int query(int i)
+{
+    int sum = 0;
+    while(i>0)
+    {
+        sum += tree[i];
+        i -= (i & -i);
+    }
+    return sum;
+}
+
+void update(int i, int x, int n)
+{
+    while(i<=n)
+    {
+        tree[i] += x;
+        i += (i&-i);
+    }
+}
+int range_query(int i, int j)
+{
+    int pre = query(i-1);
+    int suf = query(j);
+    return suf-pre;
+}
+int main()
+{
+    //read;
+    int t;
+    cin >> t;
+    while(t--)
+    {
+        int n,k;
+        cin >> n >> k;
+
+        for(int i = 1 ; i<=n ; i++) cin >> arr[i];
+
+        for(int i = 2 ; i<=n-1 ; i++)
+        {
+            if(arr[i]>arr[i-1] && arr[i]>arr[i+1]) {update(i,1,n);peaks[i]=1;}
+            else update(i,0,n);
+        }
+        int mx = 0,l=1,ans=1;
+
+        for(int i = 1 ; i<=(n-k+1); i++)
+        {
+            int x = range_query(i,i+k-1);
+            if(peaks[i]==1) x--;
+            if(peaks[i+k-1]==1) x--;
+            //if(x==0)x=1;
+
+            if(x>mx)
+            {
+                mx=x;
+                l=i;
+                ans = x+1;
+            }
+        }
+        cout << ans <<" " << l << endl;
+        for(int i = 1 ; i<=n ; i++){tree[i]=0;peaks[i]=0;}
+
+    }
+
+    return 0;
+}
