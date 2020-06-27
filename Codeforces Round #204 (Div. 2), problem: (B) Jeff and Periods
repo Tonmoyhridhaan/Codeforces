@@ -1,0 +1,58 @@
+#pragma GCC optimize("Ofast")
+#pragma GCC target("avx,avx2,fma")
+#pragma GCC optimization ("unroll-loops")
+
+#include<bits/stdc++.h>
+using namespace std;
+#define pb push_back
+#define pii pair<int,int>
+#define pli pair<long long int,int>
+#define pbi pair<bool,int>
+#define pob pop_back
+#define all(a) a.begin(),a.end()
+#define fio ios_base::sync_with_stdio(false); cin.tie(NULL);cout.tie(NULL);
+#define i64 long long int
+#define mem(x,y) memset(x,y,sizeof(x))
+#define fill(arr,b) fill(arr, arr+sizeof(arr)/sizeof(arr[0]), b)
+#define maxarr(n,arr,m) m=-1e9;for(int i=0;i<n;i++)if(arr[i]>m) m=arr[i];
+#define read freopen("input.txt","r",stdin);
+#define sortd(x,y) sort(x,y,greater<int>());
+#define F first
+#define S second
+
+const int maxn = (i64)1e9+7;
+const double pi = acos(-1.0);
+
+//bool fne(const pii &a, const pii &b){return (a.F > b.F)||(a.F==b.F&&a.S>b.S);}
+//bool sne(const pii &a, const pii &b){return (a.S < b.S)||(a.S==b.S&&a.F<b.F);}
+//bool isprime(int n){for(int i=2;i*i<=n;i++){if(n%i==0)return false;}return true;}
+
+int main(){
+    //read;
+    fio;
+    int n;
+    cin>>n;
+    pii arr[n+3];
+    for(int i=0;i<n;i++) {cin>>arr[i].F;arr[i].S=i;}
+    sort(arr,arr+n);
+    vector<pii>v;
+    int diff=0,prev=-1;
+    bool fg=true;
+    for(int i=0;i+1<n;i++){
+        if(arr[i].F==arr[i+1].F) {
+            diff=arr[i+1].S-arr[i].S;
+            if(prev==-1)prev=diff;
+            else if(prev!=diff)fg=false;
+        }
+        else{
+            if(fg)v.pb({arr[i].F,diff});
+            diff=0;prev=-1;fg=true;
+        }
+    }
+    if(fg)v.pb({arr[n-1].F,diff});
+    int sz=v.size();
+    cout<<sz<<endl;
+    for(int i=0;i<sz;i++) cout<<v[i].F<<" "<<v[i].S<<endl;
+    return 0;
+
+}
