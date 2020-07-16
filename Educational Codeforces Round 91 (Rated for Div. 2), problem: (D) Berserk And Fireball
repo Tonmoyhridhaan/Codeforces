@@ -1,0 +1,73 @@
+#pragma GCC optimize("Ofast")
+#pragma GCC target("avx,avx2,fma")
+#pragma GCC optimization ("unroll-loops")
+
+#include<bits/stdc++.h>
+
+/*#include<ext/pb_ds/assoc_container.hpp>
+#include<ext/pb_ds/tree_policy.hpp>
+using namespace __gnu_pbds;
+
+typedef tree<int,null_type,less<int>,rb_tree_tag,tree_order_statistics_node_update> ordered_set;
+*/
+using namespace std;
+#define     pb                  push_back
+#define     pii                 pair<int,int>
+#define     pli                 pair<long long int,int>
+#define     pbi                 pair<bool,int>
+#define     pob                 pop_back
+#define     all(a)              a.begin(),a.end()
+#define     fio                 ios_base::sync_with_stdio(false); cin.tie(NULL);cout.tie(NULL);
+#define     i64                 long long int
+#define     mem(x,y)            memset(x,y,sizeof(x))
+#define     fill(arr,b)         fill(arr, arr+sizeof(arr)/sizeof(arr[0]), b)
+#define     maxarr(n,arr,m)      m=-1e9;for(int i=0;i<n;i++)if(arr[i]>m) m=arr[i];
+#define     read                freopen("input.txt","r",stdin);
+#define     sortd(x,y)          sort(x,y,greater<int>());
+#define     F                   first
+#define     S                   second
+
+const int maxn = (i64)1e9+7;
+const double pi = acos(-1.0);
+
+//bool fne(const pii &a, const pii &b){return (a.F > b.F)||(a.F==b.F&&a.S>b.S);}
+//bool sne(const pii &a, const pii &b){return (a.S < b.S)||(a.S==b.S&&a.F<b.F);}
+//bool isprime(int n){for(int i=2;i*i<=n;i++){if(n%i==0)return false;}return true;}
+
+int main(){
+    //read;
+    fio;
+    int n,m;
+    cin>>n>>m;
+    i64 x,k,y;
+    cin>>x>>k>>y;
+    int a[n+5],b[n+5];
+    for(int i=1;i<=n;i++)cin>>a[i];
+    for(int i=1;i<=m;i++)cin>>b[i];
+    a[0]=0ll,a[n+1]=0ll,b[0]=0ll,b[m+1]=0ll;
+    //cout<<n<<" "<<m<<endl;
+    vector<i64>v;
+    i64 ans=0;
+    for(i64 i=1,j=1;i<=n+1;i++){
+        if(a[i]!=b[j]) {v.pb(a[i]);}
+        else{
+            if(!v.size()){j++;continue;}
+            //for(auto it:v)cout<<it<<" ";
+            sort(all(v));
+            //for(auto it:v)cout<<it<<" ";
+            i64 mx=max(b[j],b[j-1]);
+            i64 sz=v.size();
+            if(v[sz-1]>mx&&sz<k){cout<<-1;return 0;}
+            if(k*y<x){
+                if(v[sz-1]<mx) ans+=(y*sz);
+                else ans+=(sz-k)*y+x;
+            }
+            else ans+=(sz%k)*y+(sz/k)*x;
+            j++;
+            v.clear();
+        }
+        if(i==n+1&&j!=m+2){cout<<-1;return 0;}
+    }
+    cout<<ans;
+    return 0;
+}
